@@ -317,7 +317,6 @@ button {
   transform: translate(-50%, -50%);
   width: 500px;
   height: 400px;
-  background-color: aqua;
   z-index: 53;
 }
 
@@ -332,6 +331,8 @@ button {
   align-items: center;
   justify-content: space-evenly;
   background-color: #595959;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
   width: 100%;
   height: 100%;
 }
@@ -349,6 +350,8 @@ button {
   align-items: center;
   width: 100%;
   height: 100%;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
   background-color: rgb(242, 242, 242);
 }
 
