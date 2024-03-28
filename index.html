@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="style.css" />
+    <script
+      src="https://kit.fontawesome.com/581f906241.js"
+      crossorigin="anonymous"
+    ></script>
+    <title>Elevāre</title>
+  </head>
+  <body>
+    <header class="header">
+      <div class="container-nav">
+        <div class="logo-container" onclick="scrollToHome()">
+          <p class="logo">Elevāre</p>
+        </div>
+        <div class="navigation">
+          <ul>
+            <li onclick="scrollToHome()">Home</li>
+            <li onclick="scrollToCollection()">Collection</li>
+            <li onclick="scrollToAbout()">About</li>
+          </ul>
+          <!-- <p>Contact</p> -->
+        </div>
+        <div class="user-in">
+          <!-- <button class="log-in" href="expand">Log In</button>
+          <button class="sign-in">Sign In</button> -->
+          <p class="username-label hidden">vryon_antonio</p>
+          <button class="crt-acc-btn">Sign in</button>
+          <button class="logout-btn hidden">Log out</button>
+        </div>
+      </div>
+
+      <div id="home" class="content top-container">
+        <img
+          class="top-img"
+          src="images/top-hero-image.jpg"
+          alt="top-hero-image"
+        />
+        <p class="top-text">
+          <span class="welcome-text"> Welcome to Elavare, </span><br />where
+          luxury meets simplicity.
+        </p>
+      </div>
+    </header>
+
+    <div id="shop" class="content shop-container">
+      <div class="item-container">
+        <img src="images/shop-img-1.jpg" alt="shop-img-1" />
+        <p>$1,230</p>
+      </div>
+      <div class="item-container">
+        <img src="images/shop-img-2.jpg" alt="shop-img-2" />
+        <p>$1,230</p>
+      </div>
+      <div class="item-container">
+        <img src="images/shop-img-3.jpg" alt="shop-img-3" />
+        <p>$1,230</p>
+      </div>
+    </div>
+
+    <div id="about" class="content about-container">
+      <p>
+        <strong>About Elavare </strong> <br />
+        <br />
+        At Elavare, we believe in the power of simplicity. <br />
+        <br />
+        Established with a passion for minimalist aesthetics and uncompromising
+        quality, <br />
+        Elavare is not just a clothing brand—it's a statement. Our journey began
+        with a vision <br />
+        to redefine luxury, stripping away the unnecessary to reveal the true
+        beauty of simplicity. <br />
+        <br />
+        We are committed to curating a collection that transcends trends, where
+        each piece <br />is a testament to the artistry of understated elegance.
+        Every garment at Elavare is thoughtfully <br />designed, meticulously
+        crafted, and infused with a sense of timeless sophistication.<br />
+        <br />
+        Beyond fashion, Elavare is a celebration of individuality and
+        self-expression.<br />
+        We embrace the unique journey of each wearer, offering pieces that
+        seamlessly <br />blend into every aspect of their lives.<br />
+        <br />
+        Join us on this journey where less is truly more, and style is an
+        extension of identity. <br />Welcome to Elavare—where simplicity becomes
+        a statement, and luxury is redefined.
+      </p>
+    </div>
+
+    <footer>&copy; 2024 Elevāre</footer>
+
+    <div class="overlay"></div>
+
+    <form class="crt-acc-form">
+      <!-- SIGNIN -->
+      <div class="signin-container">
+        <h3>SIGN IN</h3>
+        <div class="email-form">
+          <input type="email" placeholder="E-mail" class="email-input" />
+        </div>
+        <div class="username-signin username-form">
+          <input
+            type="text"
+            place
+            placeholder="Username"
+            class="username-signin username"
+          />
+        </div>
+        <div class="password-form">
+          <input
+            type="password"
+            place
+            placeholder="Password"
+            class="password-input password"
+          />
+          <button class="eye-btn eye-pw">
+            <i class="fa-solid fa-eye-slash"></i>
+          </button>
+        </div>
+        <div class="password-form">
+          <input
+            type="password"
+            place
+            placeholder="Re-enter password "
+            class="re-password-input password"
+          />
+          <button class="eye-btn eye-rpw">
+            <i class="fa-solid fa-eye-slash"></i>
+          </button>
+        </div>
+        <p class="check-crt-acc hidden">
+          Please review your email, username, and password entries and try
+          again.
+        </p>
+        <button class="crt-acc-btn-form">Create Account</button>
+        <button class="to-login-btn">Already have an account?</button>
+      </div>
+      <!-- LOGIN -->
+      <div class="login-container hidden">
+        <h3>LOG IN</h3>
+        <div class="email-login">
+          <input type="email" placeholder="E-mail" class="email-input-login" />
+        </div>
+        <div class="password-form-login">
+          <input
+            type="password"
+            place
+            placeholder="Password"
+            class="password-input-login password"
+          />
+          <button class="eye-btn eye-lpw">
+            <i class="fa-solid fa-eye-slash"></i>
+          </button>
+        </div>
+        <p class="check-login hidden">
+          Please review your email, username, and password entries and try
+          again.
+        </p>
+        <button class="login-btn">Log In</button>
+        <button class="to-signin-btn">Create an account</button>
+      </div>
+    </form>
+
+    <div class="logout-verification hidden">
+      <button class="logout-cancel">Cancel</button>
+      <button class="logout-verify">Log out</button>
+    </div>
+
+    <div class="crt-acc-success hidden">
+      <div class="check-success-section">
+        <img src="images/check-mark.png" alt="check-mark" />
+        <h2>SUCCESS</h2>
+      </div>
+      <div class="message-continue-section">
+        <p>
+          Congratulations on becoming a member of our exclusive <br />
+          fashion community. Explore our exquisite collections.
+        </p>
+        <button class="success-continue">Continue</button>
+      </div>
+    </div>
+
+    <script src="script.js"></script>
+  </body>
+</html>
