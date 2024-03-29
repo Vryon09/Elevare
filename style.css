@@ -315,8 +315,8 @@ button {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 500px;
-  height: 400px;
+  width: 450px;
+  height: 350px;
   z-index: 53;
 }
 
@@ -363,8 +363,8 @@ button {
   background-color: #595959;
   border: 1px solid #595959;
   color: white;
-  padding: 15px;
-  font-size: 1.5rem;
+  padding: 10px;
+  font-size: 1.3rem;
   font-weight: 600;
   cursor: pointer;
 }
