@@ -116,10 +116,8 @@ const addAccount = (email, password, username) => {
   console.log(accounts);
 };
 
-//Button form
-crtBtnFormEl.addEventListener("click", function (e) {
-  e.preventDefault();
-
+//Create Account button fnctions
+const creatingAccountChange = () => {
   const email = emailInputEl.value.trim();
   const username = usernameInputEl.value.trim();
   const password = passwordInputEl.value.trim();
@@ -152,11 +150,12 @@ crtBtnFormEl.addEventListener("click", function (e) {
     input.value = "";
     console.log(email, password, username);
   });
-});
+};
 
-successContinueBtn.addEventListener("click", () => {
-  crtAccSucessModal.classList.add("hidden");
-  overlayEl.style.display = "none";
+crtBtnFormEl.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  creatingAccountChange();
 });
 
 window.addEventListener("keydown", function (e) {
@@ -167,6 +166,20 @@ window.addEventListener("keydown", function (e) {
       input.value = "";
     });
   }
+
+  //Create Account button shortcut enter key
+  if (e.key == "Enter" && crtBtnFormEl) {
+    creatingAccountChange();
+  }
+
+  if (e.key == "Enter" && loginBtn) {
+    loggingAccountChange();
+  }
+});
+
+successContinueBtn.addEventListener("click", () => {
+  crtAccSucessModal.classList.add("hidden");
+  overlayEl.style.display = "none";
 });
 
 //Eye functions
@@ -219,10 +232,7 @@ loginPasswordEye.addEventListener("click", function () {
 });
 
 //LOG IN
-
-loginBtn.addEventListener("click", function (e) {
-  e.preventDefault();
-
+const loggingAccountChange = () => {
   const email = emailInputLogin.value.trim();
   const password = passwordInputLogin.value.trim();
 
@@ -233,6 +243,12 @@ loginBtn.addEventListener("click", function (e) {
   } else {
     checkLogin.classList.remove("hidden");
   }
+};
+
+loginBtn.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  loggingAccountChange();
 });
 
 logoutBtn.addEventListener("click", function () {
