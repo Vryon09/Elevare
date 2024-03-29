@@ -46,6 +46,24 @@ const logoutVerify = document.querySelector(".logout-verify");
 
 const toBtns = [toLoginBtnEl, toSigninBtnEl];
 
+//Change to current account function
+let currentAcc;
+
+const changeToCurrentAcc = (currAcc) => {
+  checkLogin.classList.add("hidden");
+  emailInputLogin.value = "";
+  passwordInputLogin.value = "";
+  formAccEl.style.display = "none";
+  // overlayEl.style.display = "none";
+  console.log("Login Successful!");
+  crtAccBtnEl.classList.add("hidden");
+  logoutBtn.classList.remove("hidden");
+  usernameLabel.classList.remove("hidden");
+  usernameLabel.textContent = currentAcc.username;
+  welcomeText.textContent = `Hi, ${currAcc.username}! Welcome to Elavare,`;
+  console.log(currentAcc);
+};
+
 //Scroll to view functions
 const scrollToHome = () => {
   homeEl.scrollIntoView({ behavior: "smooth" });
@@ -126,6 +144,10 @@ crtBtnFormEl.addEventListener("click", function (e) {
   overlayEl.style.display = "block";
   addAccount(email, password, username);
 
+  currentAcc = accounts[accounts.length - 1];
+
+  changeToCurrentAcc(currentAcc);
+
   allInputEl.forEach((input) => {
     input.value = "";
     console.log(email, password, username);
@@ -197,11 +219,6 @@ loginPasswordEye.addEventListener("click", function () {
 });
 
 //LOG IN
-let currentAcc;
-
-const welcomeTextChange = (currAcc) => {
-  welcomeText.textContent = `Hi, ${currAcc.username}! Welcome to Elavare,`;
-};
 
 loginBtn.addEventListener("click", function (e) {
   e.preventDefault();
@@ -211,18 +228,8 @@ loginBtn.addEventListener("click", function (e) {
 
   currentAcc = accounts.find((acc) => acc.email == email);
   if (currentAcc && currentAcc.password == password) {
-    checkLogin.classList.add("hidden");
-    emailInputLogin.value = "";
-    passwordInputLogin.value = "";
-    formAccEl.style.display = "none";
     overlayEl.style.display = "none";
-    console.log("Login Successful!");
-    crtAccBtnEl.classList.add("hidden");
-    logoutBtn.classList.remove("hidden");
-    usernameLabel.classList.remove("hidden");
-    usernameLabel.textContent = currentAcc.username;
-    welcomeTextChange(currentAcc);
-    console.log(currentAcc);
+    changeToCurrentAcc(currentAcc);
   } else {
     checkLogin.classList.remove("hidden");
   }
@@ -231,11 +238,6 @@ loginBtn.addEventListener("click", function (e) {
 logoutBtn.addEventListener("click", function () {
   logoutVerification.classList.remove("hidden");
   overlayEl.style.display = "block";
-  // crtAccBtnEl.classList.remove("hidden");
-  // logoutBtn.classList.add("hidden");
-  // usernameLabel.classList.add("hidden");
-  // usernameLabel.textContent = "";
-  // welcomeText.textContent = `Welcome to Elavare,`;
 });
 
 logoutVerify.addEventListener("click", () => {
