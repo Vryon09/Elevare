@@ -287,3 +287,5 @@ const navObserver = new IntersectionObserver(stickyNav, {
   threshold: 0,
 });
 navObserver.observe(header);
+
+console.log(window.innerHeight);

@@ -1,3 +1,5 @@
+/* Global Section */
+
 * {
   margin: 0;
   padding: 0;
@@ -9,6 +11,8 @@ button {
   border: none;
 }
 
+/* HEADER */
+
 .container-nav {
   /* position: fixed; */
   position: absolute;
@@ -18,13 +22,7 @@ button {
   width: 100%;
   height: 15vh;
   border-bottom: 1px solid #111;
-  /* background-color: rgb(255, 255, 255); */
   z-index: 50;
-}
-
-.sticky {
-  position: fixed;
-  background-color: rgb(255, 255, 255, 0.8);
 }
 
 .logo-container {
@@ -32,16 +30,18 @@ button {
   justify-content: center;
   align-items: center;
   width: 20%;
-  /* font-family: Georgia, 'Times New Roman', Times, serif; */
-  font-size: 2rem;
   cursor: pointer;
-  /* border-right: 1px solid black; */
 }
 
+.logo {
+  font-size: 2rem;
+  font-weight: 200;
+}
+
+/* navigation */
 .navigation {
   width: 60%;
   font-size: 1.2rem;
-  /* background-color: red; */
 }
 
 .navigation ul {
@@ -64,12 +64,18 @@ button {
   border-radius: 3px;
 }
 
+/* account elements */
 .user-in {
   display: flex;
   justify-content: space-evenly;
   align-items: center;
   width: 20%;
   font-size: 1.5rem;
+}
+
+.username-label {
+  font-size: 1.2rem;
+  margin-right: 10px;
 }
 
 .crt-acc-btn,
@@ -82,59 +88,24 @@ button {
   background-color: transparent;
 }
 
-.crt-acc-btn:hover {
-  border: 1px solid black;
-}
-
+.crt-acc-btn:hover,
 .logout-btn:hover {
   border: 1px solid black;
 }
 
-.username-label {
-  font-size: 1.2rem;
-  margin-right: 10px;
-}
-
+/* hidden account form */
 .crt-acc-form {
   position: fixed;
-  /* display: flex; */
   display: none;
   justify-content: center;
   align-items: center;
-  /* width: 100%;
-  height: 100vh; */
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 52;
 }
 
-.signin-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: #f2f2f2;
-  width: 400px;
-  height: 60vh;
-}
-
-.signin-container > input {
-  padding: 0 5px;
-}
-
-.signin-container > * {
-  margin: 6px;
-  width: 300px;
-  height: 30px;
-  font-size: 1.2rem;
-  border: none;
-}
-
-.signin-container h3 {
-  text-align: center;
-}
-
+.signin-container,
 .login-container {
   display: flex;
   flex-direction: column;
@@ -145,10 +116,7 @@ button {
   height: 60vh;
 }
 
-.login-container > input {
-  padding: 0 5px;
-}
-
+.signin-container > *,
 .login-container > * {
   margin: 6px;
   width: 300px;
@@ -157,14 +125,16 @@ button {
   border: none;
 }
 
+.signin-container h3,
 .login-container h3 {
   text-align: center;
 }
 
-/* SIGN IN */
 .email-form,
 .email-login,
-.username-form {
+.username-form,
+.password-form,
+.password-form-login {
   width: 300px;
   height: 40px;
   background-color: rgb(255, 255, 255);
@@ -172,48 +142,26 @@ button {
   justify-content: center;
   align-items: center;
   border: 1px black solid;
-}
-
-.email-input,
-.email-input-login,
-.username {
-  width: 280px;
-  height: 30px;
-  border: none;
-  font-size: 1rem;
-}
-
-.email-input:focus {
-  outline: none;
-}
-
-.email-input-login:focus {
-  outline: none;
-}
-
-.username:focus {
-  outline: none;
 }
 
 .password-form,
 .password-form-login {
   position: relative;
-  width: 300px;
-  height: 40px;
-  background-color: rgb(255, 255, 255);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 1px black solid;
 }
 
+.email-input,
+.email-input-login,
+.username,
 .password {
   width: 280px;
   height: 30px;
-  font-size: 1rem;
   border: none;
+  font-size: 1rem;
 }
 
+.email-input:focus,
+.email-input-login:focus,
+.username:focus,
 .password:focus {
   outline: none;
 }
@@ -224,70 +172,35 @@ button {
   top: 0;
   right: 0;
   width: 50px;
-  /* background-color: aquamarine; */
   height: 100%;
 }
 
-.eye-btn:hover {
-  cursor: pointer;
-  opacity: 0.8;
-}
-
+.eye-btn:hover,
 .eye-btn-login:hover {
   cursor: pointer;
   opacity: 0.8;
 }
 
-.crt-acc-btn-form {
-  background-color: #595959;
-  border: none;
-  color: white;
-  height: 40px;
-}
-
-.crt-acc-btn-form:hover {
-  cursor: pointer;
-  opacity: 0.9;
-}
-
-.crt-acc-btn-form:active {
-  opacity: 0.5;
-}
-
+.crt-acc-btn-form,
 .login-btn {
-  /* background-color: #2f2f2f; */
   background-color: #595959;
   border: none;
   color: white;
   height: 40px;
 }
 
+.crt-acc-btn-form:hover,
 .login-btn:hover {
   cursor: pointer;
   opacity: 0.9;
 }
 
+.crt-acc-btn-form:active,
 .login-btn:active {
   opacity: 0.5;
 }
 
-.to-login-btn {
-  background-color: none;
-  border: none;
-  color: rgb(0, 0, 0);
-  font-size: 1rem;
-  text-decoration: underline;
-}
-
-.to-login-btn:hover {
-  cursor: pointer;
-  opacity: 0.9;
-}
-
-.to-login-btn:active {
-  opacity: 0.5;
-}
-
+.to-login-btn,
 .to-signin-btn {
   background-color: none;
   border: none;
@@ -296,11 +209,13 @@ button {
   text-decoration: underline;
 }
 
+.to-login-btn:hover,
 .to-signin-btn:hover {
   cursor: pointer;
   opacity: 0.9;
 }
 
+.to-login-btn:active,
 .to-signin-btn:active {
   opacity: 0.5;
 }
@@ -377,7 +292,7 @@ button {
   margin-bottom: 10px;
 }
 
-/* Log out verification */
+/* log out verification */
 .logout-verification {
   position: fixed;
   top: 50%;
@@ -409,20 +324,8 @@ button {
 .logout-cancel {
   border: 1px solid black;
 }
-/* Overlay */
-.overlay {
-  display: none;
-  /* display: block; */
-  background-color: #111;
-  width: 100%;
-  height: calc(300vh + 13vh + 30vh);
-  top: 0;
-  position: absolute;
-  opacity: 0.5;
-  z-index: 51;
-}
-/* content */
 
+/* HERO */
 #home {
   background-color: #f2f2f2;
   display: flex;
@@ -452,6 +355,7 @@ button {
   z-index: 2;
 }
 
+/* COllECTION */
 #shop {
   display: flex;
   justify-content: space-evenly;
@@ -497,6 +401,7 @@ button {
   display: none;
 }
 
+/* ABOUT */
 #about {
   /* padding: 15vh 0; */
   display: flex;
@@ -514,18 +419,7 @@ button {
   font-size: 2rem;
 }
 
-/* .expand {
-  width: 100%;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 3rem;
-  font-family: helvetica;
-  font-weight: bold;
-  background-color: #b3b3b3;
-} */
-
+/* SCROLL */
 /* WebKit (Chrome, Safari) */
 ::-webkit-scrollbar {
   width: 12px; /* Width of the scrollbar */
@@ -540,6 +434,7 @@ button {
   background-color: #f2f2f2; /* Color of the scrollbar track */
 }
 
+/* FOOTER */
 footer {
   height: 13vh;
   display: flex;
@@ -549,6 +444,19 @@ footer {
   color: white;
 }
 
+/* UTILITY */
 .hidden {
   display: none;
+}
+
+.overlay {
+  display: none;
+  /* display: block; */
+  background-color: #111;
+  width: 100%;
+  height: calc(300vh + 13vh + 30vh);
+  top: 0;
+  position: absolute;
+  opacity: 0.5;
+  z-index: 51;
 }
