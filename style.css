@@ -401,6 +401,15 @@ button {
   display: none;
 }
 
+/* SLIDESHOW */
+.slideshow {
+  width: 100%;
+}
+
+.slide img {
+  width: 100%;
+}
+
 /* ABOUT */
 #about {
   /* padding: 15vh 0; */
