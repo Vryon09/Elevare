@@ -34,23 +34,27 @@ button {
 }
 
 .logo {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 200;
 }
 
 /* navigation */
 .navigation {
   width: 60%;
-  font-size: 1.2rem;
+  font-size: 1rem;
 }
 
 .navigation ul {
   height: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: baseline;
   align-items: center;
   list-style: none;
+}
+
+.navigation ul li:not(:last-child) {
+  margin-right: 2px;
 }
 
 .navigation ul li {
@@ -80,7 +84,7 @@ button {
 
 .crt-acc-btn,
 .logout-btn {
-  font-size: 1.2rem;
+  font-size: 1rem;
   padding: 6px;
   cursor: pointer;
   border: 1px solid transparent;
