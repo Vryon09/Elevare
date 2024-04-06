@@ -282,8 +282,13 @@ const navHeight = nav.getBoundingClientRect().height;
 const stickyNav = (entries) => {
   const [entry] = entries;
   // console.log(entry);
-  if (!entry.isIntersecting) nav.classList.add("sticky");
-  else nav.classList.remove("sticky");
+  if (!entry.isIntersecting) {
+    nav.classList.add("sticky");
+    nav.style.height = "10vh";
+  } else {
+    nav.classList.remove("sticky");
+    nav.style.height = "15vh";
+  }
 };
 
 const navObserver = new IntersectionObserver(stickyNav, {
