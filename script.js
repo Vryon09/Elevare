@@ -284,7 +284,7 @@ const stickyNav = (entries) => {
   // console.log(entry);
   if (!entry.isIntersecting) {
     nav.classList.add("sticky");
-    nav.style.height = "10vh";
+    nav.style.height = "8vh";
   } else {
     nav.classList.remove("sticky");
     nav.style.height = "15vh";
@@ -338,3 +338,5 @@ const autoSlideshow = () => {
 };
 
 autoSlideshow();
+
+overlayEl.style.height = `${document.body.offsetHeight}px`;
