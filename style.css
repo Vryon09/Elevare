@@ -421,7 +421,7 @@ button {
   position: absolute;
   display: flex;
   justify-content: space-between;
-  top: 50%;
+  top: 40%;
   width: 100%;
 }
 
