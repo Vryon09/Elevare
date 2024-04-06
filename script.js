@@ -4,6 +4,7 @@ const nav = document.querySelector(".container-nav");
 const homeEl = document.querySelector("#home");
 const aboutEl = document.querySelector("#about");
 const shopEl = document.querySelector("#shop");
+const slideshowEl = document.querySelector(".slideshow");
 //Hero section
 const welcomeText = document.querySelector(".welcome-text");
 //Modal mechanics elements
@@ -78,6 +79,9 @@ const scrollToCollection = () => {
 };
 const scrollToAbout = () => {
   aboutEl.scrollIntoView({ behavior: "smooth" });
+};
+const scrollToSlideshow = () => {
+  slideshowEl.scrollIntoView({ behavior: "smooth" });
 };
 
 //Create Account Modal
