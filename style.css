@@ -406,8 +406,37 @@ button {
   width: 100%;
 }
 
+.slides {
+  position: relative;
+}
+
 .slide img {
   width: 100%;
+}
+
+.arrows {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  top: 50%;
+  width: 100%;
+}
+
+.prev,
+.next {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 2rem;
+  /* background-color: #595959; */
+  padding: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.prev:hover,
+.next:hover {
+  color: rgba(255, 255, 255, 1);
+  background-color: #000000;
+  opacity: 0.6;
 }
 
 /* ABOUT */
