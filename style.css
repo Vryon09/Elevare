@@ -401,6 +401,47 @@ button {
   display: none;
 }
 
+/* SLIDESHOW */
+.slideshow {
+  width: 100%;
+}
+
+.slides {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.slide img {
+  width: 100%;
+}
+
+.arrows {
+  position: absolute;
+  display: flex;
+  justify-content: space-between;
+  top: 50%;
+  width: 100%;
+}
+
+.prev,
+.next {
+  color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(0, 0, 0, 0.3);
+  font-size: 2rem;
+  padding: 20px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.prev:hover,
+.next:hover {
+  color: rgba(255, 255, 255, 1);
+  background-color: #000000;
+  opacity: 0.6;
+}
+
 /* ABOUT */
 #about {
   /* padding: 15vh 0; */
@@ -459,7 +500,7 @@ footer {
   /* display: block; */
   background-color: #111;
   width: 100%;
-  height: calc(300vh + 13vh + 30vh);
+  height: calc(300vh + 13vh + 30vh + 113.7vh);
   top: 0;
   position: absolute;
   opacity: 0.5;

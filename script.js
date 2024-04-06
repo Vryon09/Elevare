@@ -43,8 +43,13 @@ const logoutBtn = document.querySelector(".logout-btn");
 const logoutVerification = document.querySelector(".logout-verification");
 const logoutCancel = document.querySelector(".logout-cancel");
 const logoutVerify = document.querySelector(".logout-verify");
-
+//BUTTONS ARRAY
 const toBtns = [toLoginBtnEl, toSigninBtnEl];
+//SLIDER
+const prevArrow = document.querySelector(".prev");
+const nextArrow = document.querySelector(".next");
+const slides = document.querySelectorAll(".slide");
+const slidesArr = [...slides];
 
 //Change to current account function
 let currentAcc;
@@ -289,3 +294,42 @@ const navObserver = new IntersectionObserver(stickyNav, {
 navObserver.observe(header);
 
 console.log(window.innerHeight);
+
+//SLIDE FUNCTIONALITY
+
+prevArrow.addEventListener("click", (e) => {
+  e.preventDefault();
+  const currSlideIndex = slidesArr.findIndex(
+    (slide) => !slide.classList.contains("hidden")
+  );
+  const prevSlideIndex =
+    (currSlideIndex - 1 + slidesArr.length) % slidesArr.length;
+
+  slidesArr[currSlideIndex].classList.add("hidden");
+  slidesArr[prevSlideIndex].classList.remove("hidden");
+});
+
+nextArrow.addEventListener("click", (e) => {
+  e.preventDefault();
+  const currSlideIndex = slidesArr.findIndex(
+    (slide) => !slide.classList.contains("hidden")
+  );
+  const nextSlideIndex = (currSlideIndex + 1) % slidesArr.length;
+
+  slidesArr[currSlideIndex].classList.add("hidden");
+  slidesArr[nextSlideIndex].classList.remove("hidden");
+});
+
+const autoSlideshow = () => {
+  setInterval(() => {
+    const currSlideIndex = slidesArr.findIndex(
+      (slide) => !slide.classList.contains("hidden")
+    );
+    const nextSlideIndex = (currSlideIndex + 1) % slidesArr.length;
+
+    slidesArr[currSlideIndex].classList.add("hidden");
+    slidesArr[nextSlideIndex].classList.remove("hidden");
+  }, 5000);
+};
+
+autoSlideshow();
