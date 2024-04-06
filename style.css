@@ -408,6 +408,9 @@ button {
 
 .slides {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .slide img {
@@ -425,8 +428,8 @@ button {
 .prev,
 .next {
   color: rgba(255, 255, 255, 0.3);
+  background-color: rgba(0, 0, 0, 0.3);
   font-size: 2rem;
-  /* background-color: #595959; */
   padding: 20px;
   cursor: pointer;
   transition: 0.3s;
@@ -497,7 +500,7 @@ footer {
   /* display: block; */
   background-color: #111;
   width: 100%;
-  height: calc(300vh + 13vh + 30vh);
+  height: calc(300vh + 13vh + 30vh + 113.7vh);
   top: 0;
   position: absolute;
   opacity: 0.5;
