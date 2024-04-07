@@ -291,7 +291,7 @@ const stickyNav = (entries) => {
     nav.style.height = "8vh";
   } else {
     nav.classList.remove("sticky");
-    nav.style.height = "15vh";
+    nav.style.height = "10vh";
   }
 };
 
