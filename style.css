@@ -16,12 +16,14 @@ button {
 .container-nav {
   /* position: fixed; */
   position: absolute;
-  display: flex;
+  /* display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-between; */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   width: 100%;
-  height: 15vh;
-  border-bottom: 1px solid #111;
+  /* height: 5vh; */
+  /* border-bottom: 1px solid #111; */
   z-index: 50;
 }
 
@@ -29,28 +31,38 @@ button {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 20%;
+  width: calc(100 / 3);
   cursor: pointer;
+  /* background-color: aqua; */
 }
 
 .logo {
-  font-size: 2rem;
+  font-size: 2.5rem;
   font-weight: 200;
 }
 
 /* navigation */
 .navigation {
-  width: 60%;
-  font-size: 1.2rem;
+  width: calc(100 / 3);
+  font-size: 1rem;
+  display: flex;
+  justify-content: baseline;
+  align-items: center;
+  /* background-color: green; */
 }
 
 .navigation ul {
   height: 100%;
   display: flex;
   flex-direction: row;
-  justify-content: space-evenly;
+  justify-content: baseline;
   align-items: center;
   list-style: none;
+  margin-left: 15px;
+}
+
+.navigation ul li:not(:last-child) {
+  margin-right: 2px;
 }
 
 .navigation ul li {
@@ -67,20 +79,23 @@ button {
 /* account elements */
 .user-in {
   display: flex;
-  justify-content: space-evenly;
+  justify-content: end;
   align-items: center;
-  width: 20%;
-  font-size: 1.5rem;
+  width: calc(100 / 3);
+  justify-self: right;
+  margin-right: 15px;
 }
 
 .username-label {
   font-size: 1.2rem;
   margin-right: 10px;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 .crt-acc-btn,
 .logout-btn {
-  font-size: 1.2rem;
+  font-size: 1rem;
   padding: 6px;
   cursor: pointer;
   border: 1px solid transparent;
@@ -490,7 +505,7 @@ footer {
 /* UTILITY */
 .sticky {
   position: fixed;
-  background-color: rgb(255, 255, 255, 0.8);
+  background-color: rgb(255, 255, 255, 0.6);
 }
 
 .hidden {
