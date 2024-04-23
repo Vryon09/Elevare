@@ -51,7 +51,8 @@ button {
   height: 100%;
 }
 
-.navigation i {
+.fa-bars,
+.fa-xmark {
   display: none;
 }
 
@@ -402,12 +403,13 @@ button {
   cursor: pointer;
 }
 
-#shop .item-container img:hover {
+.item-container:hover img {
   scale: 120%;
   filter: brightness(60%);
 }
 
-.item-container img:hover + p {
+.item-container img:hover + p,
+.item-container p:hover {
   display: block;
 }
 
@@ -543,8 +545,9 @@ footer {
     display: none;
   }
 
-  .container-nav i {
+  .fa-bars {
     display: block;
+    cursor: pointer;
   }
 
   #shop {
@@ -561,6 +564,14 @@ footer {
 
   .item-container img {
     width: 100%;
+  }
+
+  #about p {
+    font-size: 1.2rem;
+  }
+
+  #about p strong {
+    font-size: 1.8rem;
   }
 }
 
@@ -580,6 +591,14 @@ footer {
   .item-container {
     width: 35%;
   }
+
+  #about p {
+    font-size: 1rem;
+  }
+
+  #about p strong {
+    font-size: 1.5rem;
+  }
 }
 
 @media (max-width: 230px) {
@@ -594,5 +613,9 @@ footer {
   .container-nav ul,
   .user-in {
     display: none;
+  }
+
+  #about p {
+    font-size: 0.5rem;
   }
 }
