@@ -51,6 +51,16 @@ const prevArrow = document.querySelector(".prev");
 const nextArrow = document.querySelector(".next");
 const slides = document.querySelectorAll(".slide");
 const slidesArr = [...slides];
+//BAR ELEMENTS
+const navigation = document.querySelector(".navigation");
+const menuBars = navigation.querySelector(".fa-bars");
+
+if (menuBars) {
+  menuBars.addEventListener("click", function () {
+    this.classList.toggle("fa-xmark");
+    this.classList.toggle("fa-bars");
+  });
+}
 
 //Change to current account function
 let currentAcc;
@@ -344,3 +354,5 @@ const autoSlideshow = () => {
 autoSlideshow();
 
 overlayEl.style.height = `${document.body.offsetHeight}px`;
+
+//BAR MENU

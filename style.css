@@ -51,8 +51,7 @@ button {
   height: 100%;
 }
 
-.fa-bars,
-.fa-xmark {
+.navigation ul i {
   display: none;
 }
 
@@ -545,7 +544,7 @@ footer {
     display: none;
   }
 
-  .fa-bars {
+  .navigation ul i {
     display: block;
     cursor: pointer;
   }
