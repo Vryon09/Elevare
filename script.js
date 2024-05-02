@@ -54,11 +54,18 @@ const slidesArr = [...slides];
 //BAR ELEMENTS
 const navigation = document.querySelector(".navigation");
 const menuBars = navigation.querySelector(".fa-bars");
+const sidebarMenus = document.querySelector(".sidebar-menus");
 
 if (menuBars) {
   menuBars.addEventListener("click", function () {
     this.classList.toggle("fa-xmark");
     this.classList.toggle("fa-bars");
+
+    if (this.classList.contains("fa-xmark")) {
+      sidebarMenus.style.display = "block";
+    } else {
+      sidebarMenus.style.display = "none";
+    }
   });
 }
 
@@ -291,29 +298,59 @@ logoutCancel.addEventListener("click", () => {
 });
 
 //Scroll nav pop-up
-const navHeight = nav.getBoundingClientRect().height;
+// const navHeight = nav.getBoundingClientRect().height;
 
-const stickyNav = (entries) => {
-  const [entry] = entries;
-  // console.log(entry);
-  if (!entry.isIntersecting) {
-    nav.classList.add("sticky");
-    nav.style.height = "8vh";
+// const stickyNav = (entries) => {
+//   const [entry] = entries;
+//   // console.log(entry);
+//   if (!entry.isIntersecting) {
+//     nav.classList.add("sticky");
+//     nav.style.height = "8vh";
+//     sidebarMenus.style.marginTop = "8vh";
+//     sidebarMenus.style.height = "92vh";
+//   }
+//   // else {
+//   //   nav.classList.add("sticky");
+//   //   nav.style.height = "10vh";
+//   //   sidebarMenus.style.marginTop = "10vh";
+//   //   sidebarMenus.style.height = "90vh";
+//   // }
+// };
+
+// const navObserver = new IntersectionObserver(stickyNav, {
+//   root: null,
+//   rootMargin: `-${navHeight}px`,
+//   threshold: 0,
+// });
+// navObserver.observe(header);
+
+// console.log(window.innerHeight);
+
+//SCROLL DOWN HIDE NAV
+
+let lastScrollY = window.scrollY;
+
+console.log(lastScrollY);
+
+window.addEventListener("scroll", function () {
+  if (lastScrollY < window.scrollY) {
+    nav.classList.add("hide");
   } else {
-    nav.classList.remove("sticky");
-    nav.style.height = "10vh";
+    nav.classList.remove("hide");
   }
-};
 
-const navObserver = new IntersectionObserver(stickyNav, {
-  root: null,
-  rootMargin: `-${navHeight}px`,
-  threshold: 0,
+  lastScrollY = window.scrollY;
 });
-navObserver.observe(header);
 
-console.log(window.innerHeight);
+let lastWindowWidth = window.innerWidth;
 
+window.addEventListener("resize", () => {
+  if (window.innerWidth >= 940) {
+    sidebarMenus.style.display = "none";
+    menuBars.classList.add("fa-bars");
+    menuBars.classList.remove("fa-xmark");
+  }
+});
 //SLIDE FUNCTIONALITY
 
 prevArrow.addEventListener("click", (e) => {
