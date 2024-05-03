@@ -64,7 +64,7 @@ button {
   background-color: rgb(255, 255, 255, 0.6);
   z-index: 99;
   width: 50%;
-  height: calc(100vh - 45px);
+  max-height: calc(100vh - 45px);
   margin-top: 45px;
   transition: 0.1s;
 }
@@ -82,7 +82,7 @@ button {
 .sidebar-menus ul li {
   cursor: pointer;
   width: 100%;
-  padding: calc(100% / 4) 0;
+  padding: calc(50% / 4) 0;
   text-align: center;
 }
 
