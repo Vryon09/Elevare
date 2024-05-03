@@ -38,9 +38,8 @@ button {
   cursor: pointer;
 }
 
-.logo {
-  font-size: 2.5rem;
-  font-weight: 200;
+.logo-container img {
+  width: 130px;
 }
 
 /* navigation */
