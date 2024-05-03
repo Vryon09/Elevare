@@ -63,6 +63,9 @@ if (menuBars) {
 
     if (this.classList.contains("fa-xmark")) {
       sidebarMenus.style.display = "block";
+      if (sidebarMenus.classList.contains("sidebar-hide")) {
+        sidebarMenus.classList.remove("sidebar-hide");
+      }
     } else {
       sidebarMenus.style.display = "none";
     }
@@ -335,8 +338,13 @@ console.log(lastScrollY);
 window.addEventListener("scroll", function () {
   if (lastScrollY < window.scrollY) {
     nav.classList.add("hide");
+    sidebarMenus.classList.add("sidebar-hide");
   } else {
     nav.classList.remove("hide");
+
+    if (menuBars.classList.contains("fa-xmark")) {
+      sidebarMenus.classList.remove("sidebar-hide");
+    }
   }
 
   lastScrollY = window.scrollY;
