@@ -76,20 +76,21 @@ button {
   align-items: center;
   height: 100%;
   list-style: none;
+  /* background-color: aqua; */
 }
 
 .sidebar-menus ul li {
   cursor: pointer;
   width: 100%;
-  padding: calc(50% / 4) 0;
+  padding: calc(100% / 4) 0;
   text-align: center;
 }
 
-.sidebar-menus ul li:first-child {
+/* .sidebar-menus ul li:first-child {
   border-top: 1px solid black;
-}
+} */
 
-.sidebar-menus ul li {
+.sidebar-menus ul li:not(:last-child) {
   border-bottom: 1px black solid;
 }
 
