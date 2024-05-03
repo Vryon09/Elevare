@@ -62,7 +62,7 @@ button {
   display: none;
   position: fixed;
   background-color: rgb(255, 255, 255, 0.6);
-  z-index: 99;
+  z-index: 50;
   width: 50%;
   max-height: calc(100vh - 45px);
   margin-top: 45px;
