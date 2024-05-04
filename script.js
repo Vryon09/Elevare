@@ -55,7 +55,39 @@ const slidesArr = [...slides];
 const navigation = document.querySelector(".navigation");
 const menuBars = navigation.querySelector(".fa-bars");
 const sidebarMenus = document.querySelector(".sidebar-menus");
+//SEARCH ELEMENTS
+const searchButton = document.querySelector(".search-btn");
+const searchBar = document.querySelector(".search-bar");
+const searchInput = document.querySelector(".search-input");
+const clearSearch = document.querySelector(".clear-search");
+const closeSearch = document.querySelector(".close-search");
 
+searchButton.addEventListener("click", function () {
+  searchBar.style.top = "0";
+  overlayEl.style.display = "block";
+});
+
+searchInput.addEventListener("input", function () {
+  if (this.value != "") {
+    clearSearch.style.display = "block";
+  } else {
+    clearSearch.style.display = "none";
+  }
+});
+
+clearSearch.addEventListener("click", function () {
+  searchInput.value = "";
+  this.style.display = "none";
+});
+
+closeSearch.addEventListener("click", function () {
+  searchBar.style.top = "-12vh";
+  searchInput.value = "";
+  clearSearch.style.display = "none";
+  overlayEl.style.display = "none";
+});
+
+//MENU FUNCTIONALITY
 if (menuBars) {
   menuBars.addEventListener("click", function () {
     this.classList.toggle("fa-xmark");
@@ -119,6 +151,7 @@ overlayEl.addEventListener("click", function () {
   logoutVerification.classList.add("hidden");
   formAccEl.style.display = "none";
   overlayEl.style.display = "none";
+  searchBar.style.top = "-12vh";
 
   allInputEl.forEach((input) => {
     input.value = "";
