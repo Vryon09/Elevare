@@ -129,6 +129,12 @@ button {
   height: 100%;
 }
 
+.search-btn {
+  cursor: pointer;
+  margin-right: 10px;
+  margin-top: 3px;
+}
+
 .username-label {
   font-size: 1.2rem;
   margin-right: 10px;
@@ -403,6 +409,7 @@ button {
   z-index: 1;
   filter: blur(3px);
   opacity: 0.8;
+  margin-top: 8vh;
 }
 
 .top-text {
