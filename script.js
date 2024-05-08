@@ -1,80 +1,66 @@
 //ITEMS OBJECT
-const item1 = {
-  itemName: "Space Shoe",
-  itemNumber: "item-1",
-  type: "shoes",
-  price: 1100,
-  description:
-    "Space Shoe in shiny black rubber is in several looks of the Balenciaga’s Summer 22, Red Carpet Collection. The Space Shoe is a highly innovative single mold alternative to the classic derby.",
-  image: "space-shoe.jpg",
-};
 
-const item2 = {
-  itemName: "10xl Sneaker",
-  itemNumber: "item-2",
-  type: "shoes",
-  price: 1700,
-  description:
-    "10XL Sneaker in white, black and grey mesh, TPU and rubber is from several looks of Balenciaga Fall 24 Collection.",
-  image: "10xl-sneaker.jpg",
-};
+const items = [
+  {
+    id: 0,
+    itemName: "Space Shoe",
+    itemNumber: "item-1",
+    type: "shoes",
+    price: 1100,
+    description:
+      "Space Shoe in shiny black rubber is in several looks of the Balenciaga’s Summer 22, Red Carpet Collection. The Space Shoe is a highly innovative single mold alternative to the classic derby.",
+    image: "space-shoe.jpg",
+  },
+  {
+    id: 1,
+    itemName: "10xl Sneaker",
+    itemNumber: "item-2",
+    type: "shoes",
+    price: 1700,
+    description:
+      "10XL Sneaker in white, black and grey mesh, TPU and rubber is from several looks of Balenciaga Fall 24 Collection.",
+    image: "10xl-sneaker.jpg",
+  },
+  {
+    id: 2,
+    itemName: "Runner Sneaker",
+    itemNumber: "item-3",
+    type: "shoes",
+    price: 1150,
+    description: "Runner Sneaker in dark grey and black mesh and nylon",
+    image: "runner-sneaker.jpg",
+  },
+  {
+    id: 3,
+    itemName: "Skater Hoodie Oversized",
+    itemNumber: "item-4",
+    type: "hoodies",
+    price: 1400,
+    description: "Skater Hoodie Oversized in black curly fleece",
+    image: "skater-hoodie-oversized.jpg",
+  },
+  {
+    id: 4,
+    itemName: "SNBN Hoodie",
+    itemNumber: "item-5",
+    type: "hoodies",
+    price: 1490,
+    description: "SNBN Hoodie Large Fit in black heavy fleece",
+    image: "snbn-hoodie.jpg",
+  },
+  {
+    id: 5,
+    itemName: 'Political Campaign "Hoodie"',
+    itemNumber: "item-6",
+    type: "hoodies",
+    price: 1150,
+    description:
+      "Political Campaign Hoodie Large Fit in black and white curly fleece",
+    image: "political-campaign-hoodie.jpg",
+  },
+];
 
-const item3 = {
-  itemName: "Runner Sneaker",
-  itemNumber: "item-3",
-  type: "shoes",
-  price: 1150,
-  description: "Runner Sneaker in dark grey and black mesh and nylon",
-  image: "runner-sneaker.jpg",
-};
-
-const item4 = {
-  itemName: "Skater Hoodie Oversized",
-  itemNumber: "item-4",
-  type: "hoodies",
-  price: 1400,
-  description: "Skater Hoodie Oversized in black curly fleece",
-  image: "skater-hoodie-oversized.jpg",
-};
-
-const item5 = {
-  itemName: "SNBN Hoodie",
-  itemNumber: "item-5",
-  type: "hoodies",
-  price: 1490,
-  description: "SNBN Hoodie Large Fit in black heavy fleece",
-  image: "snbn-hoodie.jpg",
-};
-
-const item6 = {
-  itemName: 'Political Campaign "Hoodie"',
-  itemNumber: "item-6",
-  type: "hoodies",
-  price: 1150,
-  description:
-    "Political Campaign Hoodie Large Fit in black and white curly fleece",
-  image: "political-campaign-hoodie.jpg",
-};
-
-const items = [item1, item2, item3, item4, item5, item6];
-
-const showItems = (items) => {
-  items.forEach((item) => {
-    const html = `<div class="${item.itemNumber} list-item">
-  <img src="images/${item.image}" alt="${item.itemName}" />
-  <div class="product-info">
-    <div class="product-name">${item.itemName}</div>
-    <p class="price">$${item.price}</p>
-  </div>
-</div>`;
-
-    const productsContainer = document.querySelector(".products-container");
-
-    productsContainer.insertAdjacentHTML("beforeend", html);
-  });
-};
-
-showItems(items);
+const itemsSet = [...new Set(items.map((item) => item))];
 
 //Sections elements
 const header = document.querySelector(".header");
@@ -85,6 +71,7 @@ const shopEl = document.querySelector("#shop");
 const slideshowEl = document.querySelector(".slideshow");
 //Hero section
 const welcomeText = document.querySelector(".welcome-text");
+const shopNowBtn = document.querySelector(".shop-now-btn");
 //Modal mechanics elements
 const crtAccBtnEl = document.querySelector(".crt-acc-btn");
 const formAccEl = document.querySelector(".crt-acc-form");
@@ -139,21 +126,60 @@ const searchBar = document.querySelector(".search-bar");
 const searchInput = document.querySelector(".search-input");
 const clearSearch = document.querySelector(".clear-search");
 const closeSearch = document.querySelector(".close-search");
+//PRODUCTS ELEMENTS
+const pageContent = document.querySelector(".page-content");
+const productsContainer = document.querySelector(".products-container");
+const productImages = document.querySelectorAll(".product-img");
 
-searchBar.addEventListener("keydown", function (e) {
-  if (e.key === "Enter") {
-    const itemFound = items.filter(
-      (item) =>
-        item.itemName.toLowerCase().includes(searchInput.value.toLowerCase()) ||
-        item.type.toLowerCase().includes(searchInput.value.toLowerCase())
+searchInput.addEventListener("keyup", function () {
+  const searchValue = this.value.toLowerCase();
+  const filterData = items.filter((item) => {
+    return (
+      item.itemName.toLowerCase().includes(searchValue) ||
+      item.type.toLowerCase().includes(searchValue)
     );
+  });
 
-    itemFound.forEach((item) => console.log(item));
+  showItems(filterData);
+});
 
-    if (itemFound.length === 0) {
-      console.log("Item not found");
-    }
-  }
+const showItems = (items) => {
+  productsContainer.innerHTML = items
+    .map((item) => {
+      const html = `<div class="${item.itemNumber} list-item">
+  <img src="images/${item.image}" alt="${item.itemName}" class="product-img"/>
+  <div class="product-info">
+    <div class="product-name">${item.itemName}</div>
+    <p class="price">$${item.price}</p>
+  </div>
+</div>`;
+
+      return html;
+    })
+    .join("");
+};
+
+showItems(items);
+
+// items.forEach((item) => {
+//     const html = `<div class="${item.itemNumber} list-item">
+//   <img src="images/${item.image}" alt="${item.itemName}" class="product-img"/>
+//   <div class="product-info">
+//     <div class="product-name">${item.itemName}</div>
+//     <p class="price">$${item.price}</p>
+//   </div>
+// </div>`;
+
+//     productsContainer.insertAdjacentHTML("beforeend", html);
+//   });
+
+shopNowBtn.addEventListener("click", () => {
+  showItems(items);
+  homeEl.style.display = "none";
+  aboutEl.style.display = "none";
+  shopEl.style.display = "none";
+  slideshowEl.style.display = "none";
+  pageContent.style.display = "grid";
 });
 
 //Search Functionality
