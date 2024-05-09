@@ -58,6 +58,35 @@ const items = [
       "Political Campaign Hoodie Large Fit in black and white curly fleece",
     image: "political-campaign-hoodie.jpg",
   },
+  {
+    id: 6,
+    itemName: "Baggy Sweatpants",
+    itemNumber: "item-7",
+    type: "pants",
+    price: 1250,
+    description: "Baggy Sweatpants in black archetype fleece",
+    image: "baggy-sweatpants.jpg",
+  },
+  {
+    id: 7,
+    itemName: "Tat Baggy Sweatpants",
+    itemNumber: "item-8",
+    type: "pants",
+    price: 1490,
+    description:
+      "Tat Baggy Sweatpants in light beige and black heavy fleece are from look 76 of Balenciaga Summer 24 Collection.",
+    image: "tat-baggy-sweatpants.jpg",
+  },
+  {
+    id: 8,
+    itemName: "Double Knee Pants",
+    itemNumber: "item-9",
+    type: "pants",
+    price: 2250,
+    description:
+      "Double Knee Pants in black cotton canvas are from look 55 of Balenciaga Summer 24 Collection.",
+    image: "double-knee-pants.jpg",
+  },
 ];
 
 const itemsSet = [...new Set(items.map((item) => item))];
