@@ -94,6 +94,7 @@ const itemsSet = [...new Set(items.map((item) => item))];
 //Sections elements
 const header = document.querySelector(".header");
 const nav = document.querySelector(".container-nav");
+const logo = document.querySelector(".logo");
 const homeEl = document.querySelector("#home");
 const aboutEl = document.querySelector("#about");
 const shopEl = document.querySelector("#shop");
@@ -201,6 +202,14 @@ showItems(items);
 
 //     productsContainer.insertAdjacentHTML("beforeend", html);
 //   });
+
+logo.addEventListener("click", () => {
+  homeEl.style.display = "flex";
+  aboutEl.style.display = "flex";
+  shopEl.style.display = "flex";
+  slideshowEl.style.display = "block";
+  pageContent.style.display = "none";
+});
 
 shopNowBtn.addEventListener("click", () => {
   showItems(items);
