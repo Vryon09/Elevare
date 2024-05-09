@@ -4,6 +4,11 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="style.css" />
+    <link
+      rel="shortcut icon"
+      href="images/Elevare-tab.png"
+      type="image/x-icon"
+    />
     <script
       src="https://kit.fontawesome.com/581f906241.js"
       crossorigin="anonymous"
@@ -24,7 +29,7 @@
           </ul>
         </div>
 
-        <div class="logo-container" onclick="scrollToHome()">
+        <div class="logo-container">
           <!-- <h1 class="logo">Elevāre</h1> -->
           <img src="images/Elevare-logo.png" alt="elevare-logo" class="logo" />
         </div>
@@ -38,9 +43,29 @@
           <!-- <button class="log-in" href="expand">Log In</button>
           <button class="sign-in">Sign In</button> -->
           <p class="username-label hidden">vryon_antonio</p>
-          <button class="crt-acc-btn">SIGN IN</button>
+          <button class="crt-acc-btn">SIGN UP</button>
           <button class="logout-btn hidden">LOG OUT</button>
         </div>
+      </div>
+
+      <!-- Search bar -->
+      <div class="search-bar">
+        <div class="search-input-container">
+          <input
+            type="text"
+            placeholder="What are you looking for?"
+            class="search-input"
+          />
+          <button class="clear-search">
+            <i
+              class="fa-regular fa-circle-xmark fa-xl"
+              style="color: #000000"
+            ></i>
+          </button>
+        </div>
+        <button class="close-search">
+          <i class="fa-solid fa-xmark fa-2xl" style="color: #000000"></i>
+        </button>
       </div>
 
       <!-- Hidden side bar -->
@@ -53,6 +78,56 @@
         </ul>
       </div>
 
+      <div class="search-result">
+        <div class="result-header">
+          <span>Search <strong>"shoes"</strong></span>
+          <div class="result-count">3 results</div>
+        </div>
+      </div>
+
+      <div class="page-content">
+        <div class="filters-bar">
+          <div class="right-filters">
+            <button>
+              <span>Type</span>
+              <i class="fa-solid fa-chevron-down" style="color: #000000"></i>
+            </button>
+          </div>
+          <div class="left-filters">
+            <button>
+              <span>Sort</span>
+              <i class="fa-solid fa-chevron-down" style="color: #000000"></i>
+            </button>
+          </div>
+        </div>
+        <div class="products-container">
+          <!-- <div class="item-1 list-item">
+          <img src="images/space-shoe.jpg" alt="space-shoe" />
+          <div class="product-info">
+            <div class="product-name">Space Shoe</div>
+            <p class="price">$1,100</p>
+          </div>
+        </div> -->
+
+          <!-- <div class="item-2 list-item">
+          <img src="images/10xl-sneaker.jpg" alt="10xl-sneaker" />
+
+          <div class="product-info">
+            <div class="product-name">10XL Sneaker</div>
+            <p class="price">$1,700</p>
+          </div>
+        </div> -->
+          <!-- <div class="item-3 list-item">
+          <img src="images/runner-sneaker.jpg" alt="runner-sneaker" />
+          <div class="product-info">
+            <div class="product-name">Runner Sneaker</div>
+            <p class="price">$1,150</p>
+          </div>
+        </div> -->
+        </div>
+      </div>
+
+      <!-- Hero -->
       <div id="home" class="content top-container">
         <img
           class="top-img"
@@ -63,21 +138,22 @@
           <span class="welcome-text"> Welcome to Elavare, </span><br />where
           luxury meets simplicity.
         </p>
+        <button class="shop-now-btn">Shop Now</button>
       </div>
     </header>
 
     <div id="shop" class="content shop-container">
       <div class="item-container">
         <img src="images/shop-img-1.jpg" alt="shop-img-1" />
-        <p>$1,590</p>
+        <p>$20,590</p>
       </div>
       <div class="item-container">
         <img src="images/shop-img-2.jpg" alt="shop-img-2" />
-        <p>$1,230</p>
+        <p>$18,230</p>
       </div>
       <div class="item-container">
         <img src="images/shop-img-3.jpg" alt="shop-img-3" />
-        <p>$1,770</p>
+        <p>$19,770</p>
       </div>
     </div>
 
@@ -138,7 +214,7 @@
     <form class="crt-acc-form">
       <!-- SIGNIN -->
       <div class="signin-container">
-        <h3>SIGN IN</h3>
+        <h3>SIGN UP</h3>
         <div class="email-form">
           <input type="email" placeholder="E-mail" class="email-input" />
         </div>

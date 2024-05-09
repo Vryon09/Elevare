@@ -1,12 +1,107 @@
+//ITEMS OBJECT
+
+const items = [
+  {
+    id: 0,
+    itemName: "Space Shoe",
+    itemNumber: "item-1",
+    type: "shoes",
+    price: 1100,
+    description:
+      "Space Shoe in shiny black rubber is in several looks of the Balenciaga’s Summer 22, Red Carpet Collection. The Space Shoe is a highly innovative single mold alternative to the classic derby.",
+    image: "space-shoe.jpg",
+  },
+  {
+    id: 1,
+    itemName: "10xl Sneaker",
+    itemNumber: "item-2",
+    type: "shoes",
+    price: 1700,
+    description:
+      "10XL Sneaker in white, black and grey mesh, TPU and rubber is from several looks of Balenciaga Fall 24 Collection.",
+    image: "10xl-sneaker.jpg",
+  },
+  {
+    id: 2,
+    itemName: "Runner Sneaker",
+    itemNumber: "item-3",
+    type: "shoes",
+    price: 1150,
+    description: "Runner Sneaker in dark grey and black mesh and nylon",
+    image: "runner-sneaker.jpg",
+  },
+  {
+    id: 3,
+    itemName: "Skater Hoodie Oversized",
+    itemNumber: "item-4",
+    type: "hoodies",
+    price: 1400,
+    description: "Skater Hoodie Oversized in black curly fleece",
+    image: "skater-hoodie-oversized.jpg",
+  },
+  {
+    id: 4,
+    itemName: "SNBN Hoodie",
+    itemNumber: "item-5",
+    type: "hoodies",
+    price: 1490,
+    description: "SNBN Hoodie Large Fit in black heavy fleece",
+    image: "snbn-hoodie.jpg",
+  },
+  {
+    id: 5,
+    itemName: 'Political Campaign "Hoodie"',
+    itemNumber: "item-6",
+    type: "hoodies",
+    price: 1150,
+    description:
+      "Political Campaign Hoodie Large Fit in black and white curly fleece",
+    image: "political-campaign-hoodie.jpg",
+  },
+  {
+    id: 6,
+    itemName: "Baggy Sweatpants",
+    itemNumber: "item-7",
+    type: "pants",
+    price: 1250,
+    description: "Baggy Sweatpants in black archetype fleece",
+    image: "baggy-sweatpants.jpg",
+  },
+  {
+    id: 7,
+    itemName: "Tat Baggy Sweatpants",
+    itemNumber: "item-8",
+    type: "pants",
+    price: 1490,
+    description:
+      "Tat Baggy Sweatpants in light beige and black heavy fleece are from look 76 of Balenciaga Summer 24 Collection.",
+    image: "tat-baggy-sweatpants.jpg",
+  },
+  {
+    id: 8,
+    itemName: "Double Knee Pants",
+    itemNumber: "item-9",
+    type: "pants",
+    price: 2250,
+    description:
+      "Double Knee Pants in black cotton canvas are from look 55 of Balenciaga Summer 24 Collection.",
+    image: "double-knee-pants.jpg",
+  },
+];
+
+const itemsSet = [...new Set(items.map((item) => item))];
+
 //Sections elements
 const header = document.querySelector(".header");
 const nav = document.querySelector(".container-nav");
+const logo = document.querySelector(".logo");
 const homeEl = document.querySelector("#home");
 const aboutEl = document.querySelector("#about");
 const shopEl = document.querySelector("#shop");
 const slideshowEl = document.querySelector(".slideshow");
 //Hero section
 const welcomeText = document.querySelector(".welcome-text");
+const shopNowBtn = document.querySelector(".shop-now-btn");
 //Modal mechanics elements
 const crtAccBtnEl = document.querySelector(".crt-acc-btn");
 const formAccEl = document.querySelector(".crt-acc-form");
@@ -55,7 +150,103 @@ const slidesArr = [...slides];
 const navigation = document.querySelector(".navigation");
 const menuBars = navigation.querySelector(".fa-bars");
 const sidebarMenus = document.querySelector(".sidebar-menus");
+//SEARCH ELEMENTS
+const searchButton = document.querySelector(".search-btn");
+const searchBar = document.querySelector(".search-bar");
+const searchInput = document.querySelector(".search-input");
+const clearSearch = document.querySelector(".clear-search");
+const closeSearch = document.querySelector(".close-search");
+//PRODUCTS ELEMENTS
+const pageContent = document.querySelector(".page-content");
+const productsContainer = document.querySelector(".products-container");
+const productImages = document.querySelectorAll(".product-img");
 
+searchInput.addEventListener("keyup", function () {
+  const searchValue = this.value.toLowerCase();
+  const filterData = items.filter((item) => {
+    return (
+      item.itemName.toLowerCase().includes(searchValue) ||
+      item.type.toLowerCase().includes(searchValue)
+    );
+  });
+
+  showItems(filterData);
+});
+
+const showItems = (items) => {
+  productsContainer.innerHTML = items
+    .map((item) => {
+      const html = `<div class="${item.itemNumber} list-item">
+  <img src="images/${item.image}" alt="${item.itemName}" class="product-img"/>
+  <div class="product-info">
+    <div class="product-name">${item.itemName}</div>
+    <p class="price">$${item.price}</p>
+  </div>
+</div>`;
+
+      return html;
+    })
+    .join("");
+};
+
+showItems(items);
+
+// items.forEach((item) => {
+//     const html = `<div class="${item.itemNumber} list-item">
+//   <img src="images/${item.image}" alt="${item.itemName}" class="product-img"/>
+//   <div class="product-info">
+//     <div class="product-name">${item.itemName}</div>
+//     <p class="price">$${item.price}</p>
+//   </div>
+// </div>`;
+
+//     productsContainer.insertAdjacentHTML("beforeend", html);
+//   });
+
+logo.addEventListener("click", () => {
+  homeEl.style.display = "flex";
+  aboutEl.style.display = "flex";
+  shopEl.style.display = "flex";
+  slideshowEl.style.display = "block";
+  pageContent.style.display = "none";
+});
+
+shopNowBtn.addEventListener("click", () => {
+  showItems(items);
+  homeEl.style.display = "none";
+  aboutEl.style.display = "none";
+  shopEl.style.display = "none";
+  slideshowEl.style.display = "none";
+  pageContent.style.display = "grid";
+});
+
+//Search Functionality
+searchButton.addEventListener("click", function () {
+  searchBar.style.top = "0";
+  overlayEl.style.display = "block";
+});
+
+searchInput.addEventListener("input", function () {
+  if (this.value != "") {
+    clearSearch.style.display = "block";
+  } else {
+    clearSearch.style.display = "none";
+  }
+});
+
+clearSearch.addEventListener("click", function () {
+  searchInput.value = "";
+  this.style.display = "none";
+});
+
+closeSearch.addEventListener("click", function () {
+  searchBar.style.top = "-12vh";
+  searchInput.value = "";
+  clearSearch.style.display = "none";
+  overlayEl.style.display = "none";
+});
+
+//MENU FUNCTIONALITY
 if (menuBars) {
   menuBars.addEventListener("click", function () {
     this.classList.toggle("fa-xmark");
@@ -119,6 +310,7 @@ overlayEl.addEventListener("click", function () {
   logoutVerification.classList.add("hidden");
   formAccEl.style.display = "none";
   overlayEl.style.display = "none";
+  searchBar.style.top = "-12vh";
 
   allInputEl.forEach((input) => {
     input.value = "";
@@ -135,7 +327,7 @@ const saveAccountsToLocalStorage = () => {
 
 // accounts.splice(6, 1);
 // saveAccountsToLocalStorage();
-console.log(accounts);
+// console.log(accounts);
 
 //Add account function
 const addAccount = (email, password, username) => {
@@ -332,8 +524,6 @@ logoutCancel.addEventListener("click", () => {
 //SCROLL DOWN HIDE NAV
 
 let lastScrollY = window.scrollY;
-
-console.log(lastScrollY);
 
 window.addEventListener("scroll", function () {
   if (lastScrollY < window.scrollY) {
