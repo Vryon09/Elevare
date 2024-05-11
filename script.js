@@ -299,6 +299,7 @@ shopNowBtn.addEventListener("click", () => {
 searchButton.addEventListener("click", function () {
   searchBar.style.top = "0";
   overlayEl.style.display = "block";
+  searchInput.focus();
 });
 
 searchInput.addEventListener("input", function () {
