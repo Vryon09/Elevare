@@ -113,12 +113,11 @@ button {
 }
 
 /* Search Result */
+
 .search-result {
-  display: none;
+  /* display: none; */
   height: fit-content;
   width: 100%;
-  padding-top: 8vh;
-  /* background-color: aqua; */
 }
 
 .result-header {
@@ -126,8 +125,8 @@ button {
   width: 100%;
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 5vh;
-  /* background-color: blue; */
 }
 
 .result-header span {
@@ -135,6 +134,15 @@ button {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.no-result {
+  width: 100%;
+  height: 10vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
 }
 
 .result-count {
@@ -153,9 +161,7 @@ button {
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-top: 8vh;
-  height: 10vh;
-  /* background-color: aqua; */
+  height: 6vh;
 }
 
 .filters-bar button {
@@ -169,8 +175,39 @@ button {
 }
 
 .right-filters {
-  /* background-color: chartreuse; */
   width: 75%;
+  height: 100%;
+}
+
+.right-filters button {
+  height: 100%;
+}
+
+.right-filters ul {
+  display: none;
+  position: absolute;
+  list-style: none;
+  background-color: #f2f2f2;
+  height: 10rem;
+  width: 15rem;
+  /* display: flex; */
+  flex-direction: column;
+  justify-content: space-evenly;
+  z-index: 53;
+}
+
+.right-filters button:hover + ul,
+.right-filters ul:hover {
+  display: flex;
+}
+
+.right-filters ul li {
+  padding-left: 20px;
+  cursor: pointer;
+}
+
+.right-filters ul li:hover {
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .left-filters {
@@ -558,7 +595,7 @@ button {
   flex-direction: column;
   /* padding-top: 15vh; */
   width: 100%;
-  height: 100vh;
+  height: calc(100vh - 8vh);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -569,7 +606,6 @@ button {
   z-index: 1;
   filter: blur(3px);
   opacity: 0.8;
-  margin-top: 8vh;
 }
 
 .top-text {
@@ -734,6 +770,11 @@ footer {
 }
 
 /* UTILITY */
+.top-space {
+  height: 8vh;
+  width: 100%;
+}
+
 .searchbar-show {
   transform: translateY(12vh);
 }

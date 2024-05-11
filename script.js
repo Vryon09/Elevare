@@ -87,6 +87,34 @@ const items = [
       "Double Knee Pants in black cotton canvas are from look 55 of Balenciaga Summer 24 Collection.",
     image: "double-knee-pants.jpg",
   },
+  {
+    id: 9,
+    itemName: "Burning Unity T-shirt Oversized",
+    itemNumber: "item-10",
+    type: "t-shirts",
+    price: 850,
+    description: "Burning Unity T-Shirt Oversized in black vintage jersey",
+    image: "burning-unity-t-shirt-oversized.jpg",
+  },
+  {
+    id: 10,
+    itemName: "Paris Moon T-shirt Oversized",
+    itemNumber: "item-11",
+    type: "t-shirts",
+    price: 990,
+    description: "Paris Moon T-Shirt Oversized in black vintage jersey",
+    image: "paris-moon-t-shirt-oversized.jpg",
+  },
+  {
+    id: 11,
+    itemName: "Political Stencil T-shirt",
+    itemNumber: "item-12",
+    type: "t-shirts",
+    price: 750,
+    description:
+      "Political Stencil T-Shirt Medium Fit in black and white vintage jersey",
+    image: "political-stencil-t-shirt.jpg",
+  },
 ];
 
 const itemsSet = [...new Set(items.map((item) => item))];
@@ -151,17 +179,69 @@ const navigation = document.querySelector(".navigation");
 const menuBars = navigation.querySelector(".fa-bars");
 const sidebarMenus = document.querySelector(".sidebar-menus");
 //SEARCH ELEMENTS
+const searchResult = document.querySelector(".search-result");
+const noResult = document.querySelector(".no-result");
 const searchButton = document.querySelector(".search-btn");
 const searchBar = document.querySelector(".search-bar");
 const searchInput = document.querySelector(".search-input");
 const clearSearch = document.querySelector(".clear-search");
 const closeSearch = document.querySelector(".close-search");
+const rightFilters = document.querySelector(".right-filters");
+const typeDropdown = document.querySelector(".type-dropdown");
 //PRODUCTS ELEMENTS
 const pageContent = document.querySelector(".page-content");
 const productsContainer = document.querySelector(".products-container");
 const productImages = document.querySelectorAll(".product-img");
 
-searchInput.addEventListener("keyup", function () {
+let searchResults = [];
+
+const showResultHeader = (items) => {
+  searchResult.innerHTML = `
+        <div class="result-header">
+            <span>Search <strong>"${searchInput.value}"</strong></span>
+            <div class="result-count">${items.length} ${
+    items.length > 1 ? "results" : "result"
+  }</div>
+        </div>
+  `;
+
+  searchResult.style.display = "flex";
+};
+
+const showNoResult = () => {
+  searchResult.innerHTML = `
+  <div class="no-result">
+            <p>
+              Sorry, no results for "${searchInput.value}", please search a different item.
+            </p>
+          </div>
+  `;
+  searchResult.style.display = "flex";
+};
+
+const displayShop = () => {
+  homeEl.style.display = "none";
+  aboutEl.style.display = "none";
+  shopEl.style.display = "none";
+  slideshowEl.style.display = "none";
+  pageContent.style.display = "grid";
+};
+
+typeDropdown.addEventListener("click", (e) => {
+  if (e.target.tagName === "UL") return;
+  const targetType = e.target.textContent.toLowerCase();
+  const filterType = items.filter((item) => {
+    return targetType === item.type;
+  });
+
+  showItems(filterType);
+
+  if (targetType === "all") {
+    showItems(items);
+  }
+});
+
+searchInput.addEventListener("keyup", function (e) {
   const searchValue = this.value.toLowerCase();
   const filterData = items.filter((item) => {
     return (
@@ -169,8 +249,18 @@ searchInput.addEventListener("keyup", function () {
       item.type.toLowerCase().includes(searchValue)
     );
   });
-
   showItems(filterData);
+
+  if (e.key === "Enter") {
+    searchResults = filterData;
+    showResultHeader(searchResults);
+    if (searchResults.length <= 0 || searchInput.value === "") {
+      showNoResult();
+      showItems(items);
+    }
+    displayShop();
+    closeSearchBar();
+  }
 });
 
 const showItems = (items) => {
@@ -191,33 +281,18 @@ const showItems = (items) => {
 
 showItems(items);
 
-// items.forEach((item) => {
-//     const html = `<div class="${item.itemNumber} list-item">
-//   <img src="images/${item.image}" alt="${item.itemName}" class="product-img"/>
-//   <div class="product-info">
-//     <div class="product-name">${item.itemName}</div>
-//     <p class="price">$${item.price}</p>
-//   </div>
-// </div>`;
-
-//     productsContainer.insertAdjacentHTML("beforeend", html);
-//   });
-
 logo.addEventListener("click", () => {
   homeEl.style.display = "flex";
   aboutEl.style.display = "flex";
   shopEl.style.display = "flex";
   slideshowEl.style.display = "block";
   pageContent.style.display = "none";
+  searchResult.style.display = "none";
 });
 
 shopNowBtn.addEventListener("click", () => {
   showItems(items);
-  homeEl.style.display = "none";
-  aboutEl.style.display = "none";
-  shopEl.style.display = "none";
-  slideshowEl.style.display = "none";
-  pageContent.style.display = "grid";
+  displayShop();
 });
 
 //Search Functionality
@@ -234,16 +309,20 @@ searchInput.addEventListener("input", function () {
   }
 });
 
+const closeSearchBar = () => {
+  searchBar.style.top = "-12vh";
+  searchInput.value = "";
+  clearSearch.style.display = "none";
+  overlayEl.style.display = "none";
+};
+
 clearSearch.addEventListener("click", function () {
   searchInput.value = "";
   this.style.display = "none";
 });
 
 closeSearch.addEventListener("click", function () {
-  searchBar.style.top = "-12vh";
-  searchInput.value = "";
-  clearSearch.style.display = "none";
-  overlayEl.style.display = "none";
+  closeSearchBar();
 });
 
 //MENU FUNCTIONALITY
