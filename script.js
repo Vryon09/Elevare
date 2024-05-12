@@ -249,9 +249,9 @@ searchInput.addEventListener("keyup", function (e) {
       item.type.toLowerCase().includes(searchValue)
     );
   });
-  showItems(filterData);
-
   if (e.key === "Enter") {
+    showItems(filterData);
+
     searchResults = filterData;
     showResultHeader(searchResults);
     if (searchResults.length <= 0 || searchInput.value === "") {
@@ -459,7 +459,7 @@ crtBtnFormEl.addEventListener("click", function (e) {
   creatingAccountChange();
 });
 
-window.addEventListener("keydown", function (e) {
+formAccEl.addEventListener("keypress", function (e) {
   if (e.key == "Escape") {
     formAccEl.style.display = "none";
     overlayEl.style.display = "none";
