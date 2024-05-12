@@ -609,7 +609,9 @@ button {
 }
 
 .top-text {
-  font-size: 1.2rem;
+  /* text-transform: uppercase; */
+  letter-spacing: 1.5px;
+  font-size: 1.3rem;
   text-align: center;
   color: #ffffff;
   position: absolute;
@@ -622,9 +624,10 @@ button {
   position: absolute;
   background-color: rgba(255, 255, 255);
   width: 120px;
-  height: 35px;
-  font-size: 1.2rem;
-  border-radius: 3px;
+  height: 50px;
+  font-size: 1rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
   z-index: 2;
 }
 
