@@ -283,7 +283,31 @@ searchInput.addEventListener("keyup", function (e) {
       showNoResult();
       showItems(items);
       searchResults = items;
+      if (
+        searchValue == "eyey" ||
+        searchValue == "mahal" ||
+        searchValue == "abo" ||
+        searchValue == "ash" ||
+        searchValue == "alyssa" ||
+        searchValue == "ashley" ||
+        searchValue == "alyssa ashley" ||
+        searchValue == "alyssa ashley rotairo inarda" ||
+        searchValue == "alyssa ashley r. inarda" ||
+        searchValue == "alyssa ashley r inarda" ||
+        searchValue == "alyssa ashley inarda" ||
+        searchValue == "eyey inarda"
+      ) {
+        searchResult.innerHTML = `
+          <div class="no-result">
+            <p>
+              I love you ${searchValue}!❤️
+            </p>
+          </div>
+        `;
+        searchResult.style.display = "flex";
+      }
     }
+
     displayShop();
     closeSearchBar();
   }
