@@ -188,6 +188,7 @@ const clearSearch = document.querySelector(".clear-search");
 const closeSearch = document.querySelector(".close-search");
 const rightFilters = document.querySelector(".right-filters");
 const typeDropdown = document.querySelector(".type-dropdown");
+const priceDropdown = document.querySelector(".price-dropdown");
 //PRODUCTS ELEMENTS
 const pageContent = document.querySelector(".page-content");
 const productsContainer = document.querySelector(".products-container");
@@ -227,6 +228,15 @@ const displayShop = () => {
   pageContent.style.display = "grid";
 };
 
+const displayHome = () => {
+  homeEl.style.display = "flex";
+  aboutEl.style.display = "flex";
+  shopEl.style.display = "flex";
+  slideshowEl.style.display = "block";
+  pageContent.style.display = "none";
+  searchResult.style.display = "none";
+};
+
 typeDropdown.addEventListener("click", (e) => {
   if (e.target.tagName === "UL") return;
   const targetType = e.target.textContent.toLowerCase();
@@ -235,9 +245,24 @@ typeDropdown.addEventListener("click", (e) => {
   });
 
   showItems(filterType);
-
+  searchResults = filterType;
   if (targetType === "all") {
     showItems(items);
+    searchResults = items;
+  }
+});
+
+priceDropdown.addEventListener("click", (e) => {
+  const itemCopy = [...searchResults];
+
+  if (e.target.tagName === "UL") return;
+  if (e.target.classList[0] === "low-to-high") {
+    itemCopy.sort((a, b) => a.price - b.price);
+    showItems(itemCopy);
+  }
+  if (e.target.classList[0] === "high-to-low") {
+    itemCopy.sort((a, b) => b.price - a.price);
+    showItems(itemCopy);
   }
 });
 
@@ -257,6 +282,7 @@ searchInput.addEventListener("keyup", function (e) {
     if (searchResults.length <= 0 || searchInput.value === "") {
       showNoResult();
       showItems(items);
+      searchResults = items;
     }
     displayShop();
     closeSearchBar();
@@ -282,16 +308,12 @@ const showItems = (items) => {
 showItems(items);
 
 logo.addEventListener("click", () => {
-  homeEl.style.display = "flex";
-  aboutEl.style.display = "flex";
-  shopEl.style.display = "flex";
-  slideshowEl.style.display = "block";
-  pageContent.style.display = "none";
-  searchResult.style.display = "none";
+  displayHome();
 });
 
 shopNowBtn.addEventListener("click", () => {
   showItems(items);
+  searchResults = items;
   displayShop();
 });
 
@@ -424,7 +446,8 @@ const creatingAccountChange = () => {
   const password = passwordInputEl.value.trim();
   const rePassword = rePasswordInputEl.value.trim();
   //elements@elements.elements
-  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const emailRegex =
+    /^[^\s@]+@[^\s@]+\.[^\                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    s@]+$/;
 
   if (
     !emailRegex.test(email) ||
@@ -490,13 +513,16 @@ eyeBtnEl.forEach((eye) => {
   });
 });
 
+const changePasswordFormat = (inputName) => {
+  if (inputName.getAttribute("type") === "password") inputName.type = "text";
+  else inputName.type = "password";
+};
+
 passwordEye.addEventListener("click", function (e) {
   const eyeIcon = e.target.classList.value.split(" ").includes("fa-solid");
 
   if (eyeIcon) {
-    if (passwordInputEl.getAttribute("type") === "password")
-      passwordInputEl.type = "text";
-    else passwordInputEl.type = "password";
+    changePasswordFormat(passwordInputEl);
   }
 });
 
@@ -504,9 +530,7 @@ rePasswordEye.addEventListener("click", function (e) {
   const eyeIcon = e.target.classList.value.split(" ").includes("fa-solid");
 
   if (eyeIcon) {
-    if (rePasswordInputEl.getAttribute("type") === "password")
-      rePasswordInputEl.type = "text";
-    else rePasswordInputEl.type = "password";
+    changePasswordFormat(rePasswordInputEl);
   }
 });
 
@@ -527,9 +551,7 @@ toBtns.forEach((btn) => {
 });
 
 loginPasswordEye.addEventListener("click", function () {
-  if (passwordInputLogin.getAttribute("type") === "password")
-    passwordInputLogin.type = "text";
-  else passwordInputLogin.type = "password";
+  changePasswordFormat(passwordInputLogin);
 });
 
 //LOG IN
@@ -571,35 +593,6 @@ logoutCancel.addEventListener("click", () => {
   logoutVerification.classList.add("hidden");
   overlayEl.style.display = "none";
 });
-
-//Scroll nav pop-up
-// const navHeight = nav.getBoundingClientRect().height;
-
-// const stickyNav = (entries) => {
-//   const [entry] = entries;
-//   // console.log(entry);
-//   if (!entry.isIntersecting) {
-//     nav.classList.add("sticky");
-//     nav.style.height = "8vh";
-//     sidebarMenus.style.marginTop = "8vh";
-//     sidebarMenus.style.height = "92vh";
-//   }
-//   // else {
-//   //   nav.classList.add("sticky");
-//   //   nav.style.height = "10vh";
-//   //   sidebarMenus.style.marginTop = "10vh";
-//   //   sidebarMenus.style.height = "90vh";
-//   // }
-// };
-
-// const navObserver = new IntersectionObserver(stickyNav, {
-//   root: null,
-//   rootMargin: `-${navHeight}px`,
-//   threshold: 0,
-// });
-// navObserver.observe(header);
-
-// console.log(window.innerHeight);
 
 //SCROLL DOWN HIDE NAV
 
@@ -669,5 +662,3 @@ const autoSlideshow = () => {
 autoSlideshow();
 
 overlayEl.style.height = `${document.body.offsetHeight}px`;
-
-//BAR MENU
