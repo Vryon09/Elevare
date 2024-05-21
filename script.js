@@ -176,6 +176,7 @@ const slides = document.querySelectorAll(".slide");
 const slidesArr = [...slides];
 //BAR ELEMENTS
 const navigation = document.querySelector(".navigation");
+const navigationUl = navigation.querySelector("ul");
 const menuBars = navigation.querySelector(".fa-bars");
 const sidebarMenus = document.querySelector(".sidebar-menus");
 //SEARCH ELEMENTS
@@ -190,6 +191,7 @@ const rightFilters = document.querySelector(".right-filters");
 const typeDropdown = document.querySelector(".type-dropdown");
 const priceDropdown = document.querySelector(".price-dropdown");
 //PRODUCTS ELEMENTS
+const pageLabelContainer = document.querySelector(".page-label-container");
 const pageContent = document.querySelector(".page-content");
 const productsContainer = document.querySelector(".products-container");
 const productImages = document.querySelectorAll(".product-img");
@@ -333,9 +335,14 @@ showItems(items);
 
 logo.addEventListener("click", () => {
   displayHome();
+  pageLabelContainer.style.display = "none";
+  navigationUl.style.display = "flex";
 });
 
 shopNowBtn.addEventListener("click", () => {
+  pageLabelContainer.style.display = "flex";
+  navigationUl.style.display = "none";
+
   showItems(items);
   searchResults = items;
   displayShop();

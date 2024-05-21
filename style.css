@@ -242,6 +242,18 @@ button {
   background-color: chartreuse;
 } */
 
+.page-label-container {
+  width: 100px;
+  /* background-color: aqua; */
+  display: none;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-shop-label {
+  font-size: 1.5rem;
+}
+
 .products-container {
   /* background-color: brown; */
   display: grid;
