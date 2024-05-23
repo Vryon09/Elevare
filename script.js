@@ -187,6 +187,7 @@ const searchBar = document.querySelector(".search-bar");
 const searchInput = document.querySelector(".search-input");
 const clearSearch = document.querySelector(".clear-search");
 const closeSearch = document.querySelector(".close-search");
+const filtersBar = document.querySelector(".filters-bar");
 const rightFilters = document.querySelector(".right-filters");
 const typeDropdown = document.querySelector(".type-dropdown");
 const priceDropdown = document.querySelector(".price-dropdown");
@@ -195,8 +196,32 @@ const pageLabelContainer = document.querySelector(".page-label-container");
 const pageContent = document.querySelector(".page-content");
 const productsContainer = document.querySelector(".products-container");
 const productImages = document.querySelectorAll(".product-img");
+const productShow = document.querySelector(".product-show");
 
 let searchResults = [];
+
+const showProductDetails = (item) => {
+  productShow.innerHTML = `
+        <div class="product-images">
+            <img
+              src="images/${item.image}"
+              alt="${item.itemName}"
+              class="product-img-shown"
+            />
+          </div>
+          <div class="product-details">
+            <div class="product-details-wrapper">
+              <h1 class="product-name-shown">${item.itemName}</h1>
+              <p class="product-price-show">$${item.price}</p>
+              <p class="product-description">
+                ${item.description}
+              </p>
+              <p>id:${item.id}</p>
+            </div>
+        </div> 
+    `;
+  productShow.style.display = "flex";
+};
 
 const showResultHeader = (items) => {
   searchResult.innerHTML = `
@@ -249,22 +274,20 @@ typeDropdown.addEventListener("click", (e) => {
   showItems(filterType);
   searchResults = filterType;
   if (targetType === "all") {
-    showItems(items);
     searchResults = items;
+    showItems(searchResults);
   }
 });
 
 priceDropdown.addEventListener("click", (e) => {
-  const itemCopy = [...searchResults];
-
   if (e.target.tagName === "UL") return;
   if (e.target.classList[0] === "low-to-high") {
-    itemCopy.sort((a, b) => a.price - b.price);
-    showItems(itemCopy);
+    searchResults.sort((a, b) => a.price - b.price);
+    showItems(searchResults);
   }
   if (e.target.classList[0] === "high-to-low") {
-    itemCopy.sort((a, b) => b.price - a.price);
-    showItems(itemCopy);
+    searchResults.sort((a, b) => b.price - a.price);
+    showItems(searchResults);
   }
 });
 
@@ -322,7 +345,7 @@ const showItems = (items) => {
   <img src="images/${item.image}" alt="${item.itemName}" class="product-img"/>
   <div class="product-info">
     <div class="product-name">${item.itemName}</div>
-    <p class="price">$${item.price}</p>
+    <p class="price">$${item.price.toLocaleString()}</p>
   </div>
 </div>`;
 
@@ -337,16 +360,38 @@ logo.addEventListener("click", () => {
   displayHome();
   pageLabelContainer.style.display = "none";
   navigationUl.style.display = "flex";
+  productShow.innerHTML = "";
 });
 
 shopNowBtn.addEventListener("click", () => {
   pageLabelContainer.style.display = "flex";
+  filtersBar.style.display = "flex";
+  productsContainer.style.display = "grid";
   navigationUl.style.display = "none";
 
-  showItems(items);
   searchResults = items;
+  showItems(searchResults);
   displayShop();
+
+  productsContainer.addEventListener("click", function (e) {
+    if (e.target.parentElement.classList.contains("list-item")) {
+      const clickedItemNum = e.target.parentElement.classList[0];
+      const clickedItem = searchResults.find(
+        (item) => clickedItemNum === item.itemNumber
+      );
+      productsContainer.style.display = "none";
+      filtersBar.style.display = "none";
+      showProductDetails(clickedItem);
+    }
+  });
 });
+
+// productsContainer.addEventListener("click", function (e) {
+//   if (e.target.classList.contains("list-item")) {
+//     const clickedItem = e.target.itemNumber;
+//     console.log(clickedItem);
+//   }
+// });
 
 //Search Functionality
 searchButton.addEventListener("click", function () {

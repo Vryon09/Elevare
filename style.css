@@ -265,6 +265,7 @@ button {
   background-color: white;
   width: 100%;
   border-bottom: 1px solid black;
+  cursor: pointer;
 }
 
 .list-item:nth-child(-n + 3) {
@@ -288,6 +289,44 @@ button {
   height: 4rem;
 }
 
+.product-show {
+  width: 100%;
+  height: fit-content;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  background-color: #f2f2f2;
+}
+
+.product-images,
+.product-details {
+  width: 50%;
+}
+
+.product-images img {
+  width: 100%;
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-details-wrapper {
+  width: 90%;
+  text-align: center;
+}
+
+.product-details-wrapper > * {
+  margin-top: 10px;
+  font-size: 1.2rem;
+}
+
+.product-details-wrapper h1 {
+  font-size: 1.4rem;
+}
 /* Sidebar */
 
 .sidebar-menus {
