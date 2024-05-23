@@ -193,6 +193,7 @@ const typeDropdown = document.querySelector(".type-dropdown");
 const priceDropdown = document.querySelector(".price-dropdown");
 //PRODUCTS ELEMENTS
 const pageLabelContainer = document.querySelector(".page-label-container");
+const shopLabel = document.querySelector(".nav-shop-label");
 const pageContent = document.querySelector(".page-content");
 const productsContainer = document.querySelector(".products-container");
 const productImages = document.querySelectorAll(".product-img");
@@ -285,6 +286,7 @@ typeDropdown.addEventListener("click", (e) => {
 
 priceDropdown.addEventListener("click", (e) => {
   if (e.target.tagName === "UL") return;
+
   if (e.target.classList[0] === "low-to-high") {
     searchResults.sort((a, b) => a.price - b.price);
     showItems(searchResults);
@@ -358,13 +360,19 @@ const showItems = (items) => {
     .join("");
 };
 
-showItems(items);
+// showItems(items);
 
 logo.addEventListener("click", () => {
   displayHome();
   pageLabelContainer.style.display = "none";
   navigationUl.style.display = "flex";
   productShow.innerHTML = "";
+});
+
+shopLabel.addEventListener("click", () => {
+  filtersBar.style.display = "flex";
+  productsContainer.style.display = "grid";
+  productShow.style.display = "none";
 });
 
 shopNowBtn.addEventListener("click", () => {
@@ -385,6 +393,7 @@ shopNowBtn.addEventListener("click", () => {
       );
       productsContainer.style.display = "none";
       filtersBar.style.display = "none";
+      searchResult.style.display = "none";
       showProductDetails(clickedItem);
     }
   });
