@@ -212,11 +212,15 @@ const showProductDetails = (item) => {
           <div class="product-details">
             <div class="product-details-wrapper">
               <h1 class="product-name-shown">${item.itemName}</h1>
-              <p class="product-price-show">$${item.price}</p>
+              <p class="product-price-show">$${item.price.toLocaleString()}</p>
               <p class="product-description">
                 ${item.description}
               </p>
-              <p>id:${item.id}</p>
+              <p class="product-id">id:${item.id}</p>
+            </div>
+            <div class="product-btns-shown">
+              <button class="add-to-cart-btn">Add to cart</button>
+              <button class="buy-now-btn">Buy now</button>
             </div>
         </div> 
     `;
