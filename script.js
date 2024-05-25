@@ -260,6 +260,13 @@ const displayShop = () => {
   pageContent.style.display = "grid";
 };
 
+const displayShopLabel = () => {
+  pageLabelContainer.style.display = "flex";
+  filtersBar.style.display = "flex";
+  productsContainer.style.display = "grid";
+  navigationUl.style.display = "none";
+};
+
 const displayHome = () => {
   homeEl.style.display = "flex";
   aboutEl.style.display = "flex";
@@ -267,6 +274,19 @@ const displayHome = () => {
   slideshowEl.style.display = "block";
   pageContent.style.display = "none";
   searchResult.style.display = "none";
+};
+
+const showItemDetails = (e) => {
+  if (e.target.parentElement.classList.contains("list-item")) {
+    const clickedItemNum = e.target.parentElement.classList[0];
+    const clickedItem = searchResults.find(
+      (item) => clickedItemNum === item.itemNumber
+    );
+    productsContainer.style.display = "none";
+    filtersBar.style.display = "none";
+    searchResult.style.display = "none";
+    showProductDetails(clickedItem);
+  }
 };
 
 typeDropdown.addEventListener("click", (e) => {
@@ -280,6 +300,7 @@ typeDropdown.addEventListener("click", (e) => {
   searchResults = filterType;
   if (targetType === "all") {
     searchResults = items;
+    searchResult.style.display = "none";
     showItems(searchResults);
   }
 });
@@ -306,6 +327,11 @@ searchInput.addEventListener("keyup", function (e) {
     );
   });
   if (e.key === "Enter") {
+    displayShopLabel();
+
+    searchResults = items;
+    displayShop();
+
     showItems(filterData);
 
     searchResults = filterData;
@@ -341,6 +367,10 @@ searchInput.addEventListener("keyup", function (e) {
 
     displayShop();
     closeSearchBar();
+
+    productsContainer.addEventListener("click", function (e) {
+      showItemDetails(e);
+    });
   }
 });
 
@@ -360,8 +390,6 @@ const showItems = (items) => {
     .join("");
 };
 
-// showItems(items);
-
 logo.addEventListener("click", () => {
   displayHome();
   pageLabelContainer.style.display = "none";
@@ -376,35 +404,16 @@ shopLabel.addEventListener("click", () => {
 });
 
 shopNowBtn.addEventListener("click", () => {
-  pageLabelContainer.style.display = "flex";
-  filtersBar.style.display = "flex";
-  productsContainer.style.display = "grid";
-  navigationUl.style.display = "none";
+  displayShopLabel();
 
   searchResults = items;
   showItems(searchResults);
   displayShop();
 
   productsContainer.addEventListener("click", function (e) {
-    if (e.target.parentElement.classList.contains("list-item")) {
-      const clickedItemNum = e.target.parentElement.classList[0];
-      const clickedItem = searchResults.find(
-        (item) => clickedItemNum === item.itemNumber
-      );
-      productsContainer.style.display = "none";
-      filtersBar.style.display = "none";
-      searchResult.style.display = "none";
-      showProductDetails(clickedItem);
-    }
+    showItemDetails(e);
   });
 });
-
-// productsContainer.addEventListener("click", function (e) {
-//   if (e.target.classList.contains("list-item")) {
-//     const clickedItem = e.target.itemNumber;
-//     console.log(clickedItem);
-//   }
-// });
 
 //Search Functionality
 searchButton.addEventListener("click", function () {
@@ -527,7 +536,7 @@ const addAccount = (email, password, username) => {
   saveAccountsToLocalStorage();
   console.log(accounts);
 };
-
+console.log(accounts);
 //Create Account button fnctions
 const creatingAccountChange = () => {
   const email = emailInputEl.value.trim();

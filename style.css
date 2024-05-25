@@ -882,9 +882,46 @@ button {
 }
 
 /* FOOTER */
-footer {
-  position: relative;
-  height: 13vh;
+.footer-accordion {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  width: 100%;
+}
+
+.footer-accordion div {
+  height: 40vh;
+  padding: 15px 20px;
+  border-top: 1px solid #b3b3b3;
+  background-color: rgb(89, 89, 89, 1);
+  color: white;
+}
+
+.footer-accordion div:not(:last-child) {
+  border-right: 1px solid #b3b3b3;
+}
+
+.footer-accordion h2 {
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+.footer-accordion ul li {
+  margin-bottom: 10px;
+}
+
+.footer-accordion ul {
+  list-style: none;
+}
+
+.footer-accordion a {
+  cursor: pointer;
+  font-size: 0.8rem;
+  text-decoration: none;
+  color: white;
+}
+
+.footer-copyright {
+  height: 10vh;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -892,6 +929,8 @@ footer {
   background-color: rgb(89, 89, 89, 1);
   color: white;
   padding: 6px;
+  border-top: 1px solid #b3b3b3;
+  font-size: 0.8rem;
 }
 
 /* UTILITY */
