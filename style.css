@@ -250,7 +250,7 @@ button {
   align-items: center;
 }
 
-.nav-shop-label {
+.nav-label {
   font-size: 1.5rem;
   cursor: pointer;
 }
@@ -375,6 +375,113 @@ button {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
+/* Cart */
+.nav-cart {
+  background-color: black;
+  font-size: 1.2rem;
+  border-radius: 4px;
+  color: white;
+  text-align: center;
+  padding: 6px 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+.cart {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-top: 1px solid black;
+  border-bottom: 1px solid black;
+  display: none;
+}
+
+.cart-item-container {
+  width: 45%;
+  border-left: 1px solid black;
+  border-right: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-item-count {
+  width: 100%;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.2rem;
+  border-bottom: 1px solid black;
+}
+
+.cart-item {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.cart-item-wrapper {
+  display: flex;
+}
+
+.cart-item-container ul > *:not(:last-child) {
+  border-bottom: 1px solid black;
+}
+
+.cart-item-images {
+  /* background-color: aqua; */
+  width: 30%;
+}
+
+.cart-item img {
+  width: 100%;
+}
+
+.cart-item-details {
+  /* background-color: rgb(98, 112, 112); */
+  width: 70%;
+  padding: 10px;
+}
+
+.cart-item-details > * {
+  margin-bottom: 10px;
+}
+
+.cart-item-name {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.cart-item-quantity {
+  display: flex;
+  align-items: center;
+}
+
+.cart-item-quantity button {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 0 6px;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.cart-action {
+  display: flex;
+  justify-content: end;
+  width: 100%;
+}
+
+.cart-action > * {
+  margin-bottom: 10px;
+  margin-right: 10px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 /* Sidebar */
 
 .sidebar-menus {
@@ -453,17 +560,6 @@ button {
   margin-right: 10px;
   margin-top: 3px;
   background-color: transparent;
-}
-
-.nav-cart {
-  background-color: black;
-  font-size: 1.2rem;
-  color: white;
-  text-align: center;
-  padding: 6px 10px;
-  margin-right: 10px;
-  width: fit-content;
-  height: fit-content;
 }
 
 .username-label {

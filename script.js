@@ -117,8 +117,6 @@ const items = [
   },
 ];
 
-const itemsSet = [...new Set(items.map((item) => item))];
-
 //Sections elements
 const header = document.querySelector(".header");
 const nav = document.querySelector(".container-nav");
@@ -193,7 +191,7 @@ const typeDropdown = document.querySelector(".type-dropdown");
 const priceDropdown = document.querySelector(".price-dropdown");
 //PRODUCTS ELEMENTS
 const pageLabelContainer = document.querySelector(".page-label-container");
-const shopLabel = document.querySelector(".nav-shop-label");
+const navLabel = document.querySelector(".nav-label");
 const pageContent = document.querySelector(".page-content");
 const productsContainer = document.querySelector(".products-container");
 const productImages = document.querySelectorAll(".product-img");
@@ -201,9 +199,13 @@ const productShow = document.querySelector(".product-show");
 //ADD TO CART ELEMENTS
 const addToCartBtn = document.querySelector(".add-to-cart-btn");
 const navCart = document.querySelector(".nav-cart");
+const cart = document.querySelector(".cart");
+const cartItemContainer = document.querySelector(".cart-item-container");
+const cartUl = cartItemContainer.querySelector("ul");
 
 let searchResults = [];
 let cartItems = [];
+let cartMap;
 
 const showProductDetails = (item) => {
   productShow.innerHTML = `
@@ -262,9 +264,11 @@ const displayShop = () => {
   shopEl.style.display = "none";
   slideshowEl.style.display = "none";
   pageContent.style.display = "grid";
+  cart.style.display = "none";
 };
 
 const displayShopLabel = () => {
+  navLabel.textContent = "Shop";
   pageLabelContainer.style.display = "flex";
   filtersBar.style.display = "flex";
   productsContainer.style.display = "grid";
@@ -272,10 +276,23 @@ const displayShopLabel = () => {
 };
 
 const displayHome = () => {
+  cart.style.display = "none";
   homeEl.style.display = "flex";
   aboutEl.style.display = "flex";
   shopEl.style.display = "flex";
   slideshowEl.style.display = "block";
+  pageContent.style.display = "none";
+  searchResult.style.display = "none";
+};
+
+const hideHome = () => {
+  homeEl.style.display = "none";
+  aboutEl.style.display = "none";
+  shopEl.style.display = "none";
+  slideshowEl.style.display = "none";
+};
+
+const hideShop = () => {
   pageContent.style.display = "none";
   searchResult.style.display = "none";
 };
@@ -401,6 +418,55 @@ const showItems = (items) => {
     .join("");
 };
 
+const showCartItems = (items) => {
+  cartUl.innerHTML = items
+    .map((item) => {
+      const html = `
+          <li class="cart-item">
+            <div class="cart-item-wrapper">
+              <div class="cart-item-images">
+                <img src="images/${item.image}" alt="${item.itemName}" />
+              </div>
+                <div class="cart-item-details">
+                  <h3 class="cart-item-name">${item.itemName}</h3>
+                  <p class="cart-item-price">$${item.price.toLocaleString()}</p>
+                  <div class="cart-item-quantity">
+                    <p>Quantity:</p>
+                    <button class="decrease-quantity">-</button>
+                    <p>${item.count}</p>
+                    <button class="increase-quantity">+</button>
+                  </div>
+                </div>
+              </div>
+              <div class="cart-action">
+                <p>Edit</p>
+                <p>Delete</p>
+              </div>
+          </li>
+  `;
+
+      return html;
+    })
+    .join("");
+};
+
+navCart.addEventListener("click", function () {
+  navLabel.textContent = "Cart";
+  pageLabelContainer.style.display = "flex";
+  navigationUl.style.display = "none";
+  hideHome();
+  hideShop();
+  cart.style.display = "flex";
+  const arr = [];
+  for ([el, count] of cartMap.entries()) {
+    const filterData = items.filter((item) => el.itemName === item.itemName);
+    arr.push(filterData[0]);
+    filterData[0].count = count;
+  }
+  console.log(arr);
+  showCartItems(arr);
+});
+
 logo.addEventListener("click", () => {
   displayHome();
   pageLabelContainer.style.display = "none";
@@ -408,10 +474,12 @@ logo.addEventListener("click", () => {
   productShow.innerHTML = "";
 });
 
-shopLabel.addEventListener("click", () => {
-  filtersBar.style.display = "flex";
-  productsContainer.style.display = "grid";
-  productShow.style.display = "none";
+navLabel.addEventListener("click", () => {
+  if (navLabel.textContent === "Shop") {
+    filtersBar.style.display = "flex";
+    productsContainer.style.display = "grid";
+    productShow.style.display = "none";
+  }
 });
 
 shopNowBtn.addEventListener("click", () => {
@@ -425,6 +493,25 @@ shopNowBtn.addEventListener("click", () => {
     showItemDetails(e);
   });
 });
+
+const findDuplicate = (arr, map) => {
+  for (element of arr) {
+    if (map.has(element)) {
+      map.set(element, map.get(element) + 1);
+    } else {
+      map.set(element, 1);
+    }
+  }
+
+  const items = [];
+  for ([el, count] of map.entries()) {
+    if (count > 0) {
+      items.push({ el, count });
+    }
+  }
+  return items;
+};
+
 productShow.addEventListener("click", function (e) {
   const itemName = document.querySelector(".product-name-shown");
   const item = searchResults.find(
@@ -433,9 +520,12 @@ productShow.addEventListener("click", function (e) {
   if (e.target.classList[0] === "add-to-cart-btn") {
     cartItems.push(item);
     const cartSet = [...new Set(cartItems.map((item) => item))];
-    navCart.innerHTML = cartSet.length;
-    console.log(cartSet);
-    // localStorage.setItem("cart", JSON.stringify(cartItems));
+    navCart.innerHTML = cartItems.length;
+
+    cartMap = new Map();
+    //duplicate
+
+    console.log(findDuplicate(cartItems, cartMap));
   }
 });
 
