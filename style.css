@@ -455,6 +455,17 @@ button {
   background-color: transparent;
 }
 
+.nav-cart {
+  background-color: black;
+  font-size: 1.2rem;
+  color: white;
+  text-align: center;
+  padding: 6px 10px;
+  margin-right: 10px;
+  width: fit-content;
+  height: fit-content;
+}
+
 .username-label {
   font-size: 1.2rem;
   margin-right: 10px;
@@ -470,7 +481,7 @@ button {
   border: 1px solid transparent;
   border-radius: 3px;
   background-color: transparent;
-  margin-right: 15px;
+  margin-right: 10px;
 }
 
 .crt-acc-btn:hover,
@@ -918,6 +929,10 @@ button {
   font-size: 0.8rem;
   text-decoration: none;
   color: white;
+}
+
+.footer-accordion a:hover {
+  text-decoration: underline;
 }
 
 .footer-copyright {
