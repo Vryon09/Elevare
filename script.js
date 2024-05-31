@@ -10,6 +10,7 @@ const items = [
     description:
       "Space Shoe in shiny black rubber is in several looks of the Balenciaga’s Summer 22, Red Carpet Collection. The Space Shoe is a highly innovative single mold alternative to the classic derby.",
     image: "space-shoe.jpg",
+    count: 0,
   },
   {
     id: 1,
@@ -20,6 +21,7 @@ const items = [
     description:
       "10XL Sneaker in white, black and grey mesh, TPU and rubber is from several looks of Balenciaga Fall 24 Collection.",
     image: "10xl-sneaker.jpg",
+    count: 0,
   },
   {
     id: 2,
@@ -29,6 +31,7 @@ const items = [
     price: 1150,
     description: "Runner Sneaker in dark grey and black mesh and nylon",
     image: "runner-sneaker.jpg",
+    count: 0,
   },
   {
     id: 3,
@@ -38,6 +41,7 @@ const items = [
     price: 1400,
     description: "Skater Hoodie Oversized in black curly fleece",
     image: "skater-hoodie-oversized.jpg",
+    count: 0,
   },
   {
     id: 4,
@@ -47,6 +51,7 @@ const items = [
     price: 1490,
     description: "SNBN Hoodie Large Fit in black heavy fleece",
     image: "snbn-hoodie.jpg",
+    count: 0,
   },
   {
     id: 5,
@@ -57,6 +62,7 @@ const items = [
     description:
       "Political Campaign Hoodie Large Fit in black and white curly fleece",
     image: "political-campaign-hoodie.jpg",
+    count: 0,
   },
   {
     id: 6,
@@ -66,6 +72,7 @@ const items = [
     price: 1250,
     description: "Baggy Sweatpants in black archetype fleece",
     image: "baggy-sweatpants.jpg",
+    count: 0,
   },
   {
     id: 7,
@@ -76,6 +83,7 @@ const items = [
     description:
       "Tat Baggy Sweatpants in light beige and black heavy fleece are from look 76 of Balenciaga Summer 24 Collection.",
     image: "tat-baggy-sweatpants.jpg",
+    count: 0,
   },
   {
     id: 8,
@@ -86,6 +94,7 @@ const items = [
     description:
       "Double Knee Pants in black cotton canvas are from look 55 of Balenciaga Summer 24 Collection.",
     image: "double-knee-pants.jpg",
+    count: 0,
   },
   {
     id: 9,
@@ -95,6 +104,7 @@ const items = [
     price: 850,
     description: "Burning Unity T-Shirt Oversized in black vintage jersey",
     image: "burning-unity-t-shirt-oversized.jpg",
+    count: 0,
   },
   {
     id: 10,
@@ -104,6 +114,7 @@ const items = [
     price: 990,
     description: "Paris Moon T-Shirt Oversized in black vintage jersey",
     image: "paris-moon-t-shirt-oversized.jpg",
+    count: 0,
   },
   {
     id: 11,
@@ -114,6 +125,7 @@ const items = [
     description:
       "Political Stencil T-Shirt Medium Fit in black and white vintage jersey",
     image: "political-stencil-t-shirt.jpg",
+    count: 0,
   },
 ];
 
@@ -202,10 +214,6 @@ const navCart = document.querySelector(".nav-cart");
 const cart = document.querySelector(".cart");
 const cartItemContainer = document.querySelector(".cart-item-container");
 const cartUl = cartItemContainer.querySelector("ul");
-
-let searchResults = [];
-let cartItems = [];
-let cartMap;
 
 const showProductDetails = (item) => {
   productShow.innerHTML = `
@@ -396,6 +404,7 @@ searchInput.addEventListener("keyup", function (e) {
     productsContainer.addEventListener("click", function (e) {
       showItemDetails(e);
     });
+
     addToCartBtn.addEventListener("click", () => {
       console.log(addToCartBtn);
     });
@@ -418,6 +427,38 @@ const showItems = (items) => {
     .join("");
 };
 
+//1. Add to cart button clicked, item push to an array
+//2. Add 1 to the count of the item whenever added to cart
+//3.push the items array to a set
+//4.item set push to an non-constant variable array
+//5.Show items when navigation cart clicked
+//6. Show count of items in the cart in the inner html of nav cart
+//7.
+
+const cartItems = [];
+let cartSet;
+let cartUniqueItems;
+
+productShow.addEventListener("click", function (e) {
+  const itemName = document.querySelector(".product-name-shown");
+  const item = searchResults.find(
+    (item) => item.itemName === itemName.textContent
+  );
+  if (e.target.classList[0] === "add-to-cart-btn") {
+    cartItems.push(item);
+    item.count += 1;
+    // console.log(cartItems);
+
+    cartSet = new Set([...cartItems]);
+
+    cartUniqueItems = [...cartSet];
+
+    console.log(cartUniqueItems);
+
+    displayNumCartItems();
+  }
+});
+
 const showCartItems = (items) => {
   cartUl.innerHTML = items
     .map((item) => {
@@ -433,7 +474,7 @@ const showCartItems = (items) => {
                   <div class="cart-item-quantity">
                     <p>Quantity:</p>
                     <button class="decrease-quantity">-</button>
-                    <p>${item.count}</p>
+                    <p class="count">${item.count}</p>
                     <button class="increase-quantity">+</button>
                   </div>
                 </div>
@@ -450,6 +491,16 @@ const showCartItems = (items) => {
     .join("");
 };
 
+const displayNumCartItems = () => {
+  const cartItemCount = document.querySelector(".cart-item-count");
+  let itemQuantity = 0;
+  for (c of cartUniqueItems) {
+    itemQuantity += c.count;
+  }
+  navCart.textContent = itemQuantity;
+  cartItemCount.textContent = `Cart (${itemQuantity})`;
+};
+
 navCart.addEventListener("click", function () {
   navLabel.textContent = "Cart";
   pageLabelContainer.style.display = "flex";
@@ -457,14 +508,40 @@ navCart.addEventListener("click", function () {
   hideHome();
   hideShop();
   cart.style.display = "flex";
-  const arr = [];
-  for ([el, count] of cartMap.entries()) {
-    const filterData = items.filter((item) => el.itemName === item.itemName);
-    arr.push(filterData[0]);
-    filterData[0].count = count;
+
+  if (cartUniqueItems) {
+    showCartItems(cartUniqueItems);
+  } else {
+    console.log("no item");
   }
-  console.log(arr);
-  showCartItems(arr);
+});
+
+const displayQuantityChange = (e, sign) => {
+  const itemTarget = e.target.closest(".cart-item");
+  const targetName = itemTarget.querySelector(".cart-item-name").textContent;
+  const findTargetItem = searchResults.find(
+    (item) => targetName === item.itemName
+  );
+  const count = itemTarget.querySelector(".count");
+  if (sign === "-") {
+    if (+count.textContent <= 0) return;
+    findTargetItem.count -= 1;
+  } else if (sign === "+") {
+    findTargetItem.count += 1;
+  }
+  count.textContent = findTargetItem.count;
+  console.log(findTargetItem.count);
+
+  displayNumCartItems();
+};
+
+cartItemContainer.addEventListener("click", function (e) {
+  if (e.target.classList[0] === "increase-quantity") {
+    displayQuantityChange(e, "+");
+  }
+  if (e.target.classList[0] === "decrease-quantity") {
+    displayQuantityChange(e, "-");
+  }
 });
 
 logo.addEventListener("click", () => {
@@ -492,41 +569,6 @@ shopNowBtn.addEventListener("click", () => {
   productsContainer.addEventListener("click", function (e) {
     showItemDetails(e);
   });
-});
-
-const findDuplicate = (arr, map) => {
-  for (element of arr) {
-    if (map.has(element)) {
-      map.set(element, map.get(element) + 1);
-    } else {
-      map.set(element, 1);
-    }
-  }
-
-  const items = [];
-  for ([el, count] of map.entries()) {
-    if (count > 0) {
-      items.push({ el, count });
-    }
-  }
-  return items;
-};
-
-productShow.addEventListener("click", function (e) {
-  const itemName = document.querySelector(".product-name-shown");
-  const item = searchResults.find(
-    (item) => item.itemName === itemName.textContent
-  );
-  if (e.target.classList[0] === "add-to-cart-btn") {
-    cartItems.push(item);
-    const cartSet = [...new Set(cartItems.map((item) => item))];
-    navCart.innerHTML = cartItems.length;
-
-    cartMap = new Map();
-    //duplicate
-
-    console.log(findDuplicate(cartItems, cartMap));
-  }
 });
 
 //Search Functionality

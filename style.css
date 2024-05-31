@@ -387,11 +387,18 @@ button {
   cursor: pointer;
 }
 
+.cart-top-space {
+  height: 45px;
+  width: 100%;
+  border-bottom: 1px solid black;
+}
+
 .cart {
   width: 100%;
+  /* min-height: 100vh; */
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: baseline;
   align-items: center;
   border-top: 1px solid black;
   border-bottom: 1px solid black;
@@ -428,7 +435,7 @@ button {
   display: flex;
 }
 
-.cart-item-container ul > *:not(:last-child) {
+.cart-item-container ul > * {
   border-bottom: 1px solid black;
 }
 
@@ -480,6 +487,50 @@ button {
   margin-right: 10px;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.total-price {
+  height: 8rem;
+  width: 45%;
+  border: 1px solid black;
+  border-top: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.estimated-total {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 95%;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.check-out {
+  height: 8rem;
+  width: 45%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-top: none;
+  border-bottom: none;
+}
+
+.check-out-btn {
+  height: 45px;
+  width: 50%;
+  background-color: #000000;
+  color: white;
+  font-size: 1rem;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.check-out-btn:hover {
+  background-color: rgb(0, 0, 0, 0.8);
 }
 
 /* Sidebar */
