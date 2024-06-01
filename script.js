@@ -456,8 +456,21 @@ productShow.addEventListener("click", function (e) {
     console.log(cartUniqueItems);
 
     displayNumCartItems();
+
+    displayEstimatedPrice();
   }
 });
+
+const displayEstimatedPrice = () => {
+  const estimatedTotalPrice = document.querySelector(".estimated-total-price");
+  let estimatedPrice = 0;
+
+  cartUniqueItems.forEach((item) => {
+    estimatedPrice += item.price * item.count;
+    console.log(estimatedPrice);
+    estimatedTotalPrice.textContent = `$${estimatedPrice.toLocaleString()}`;
+  });
+};
 
 const showCartItems = (items) => {
   cartUl.innerHTML = items
@@ -533,6 +546,7 @@ const displayQuantityChange = (e, sign) => {
   console.log(findTargetItem.count);
 
   displayNumCartItems();
+  displayEstimatedPrice();
 };
 
 cartItemContainer.addEventListener("click", function (e) {
