@@ -1,3 +1,4 @@
+"use strict";
 //ITEMS OBJECT
 
 const items = [
@@ -137,17 +138,21 @@ const homeEl = document.querySelector("#home");
 const aboutEl = document.querySelector("#about");
 const shopEl = document.querySelector("#shop");
 const slideshowEl = document.querySelector(".slideshow");
+
 //Hero section
 const welcomeText = document.querySelector(".welcome-text");
 const shopNowBtn = document.querySelector(".shop-now-btn");
+
 //Modal mechanics elements
 const crtAccBtnEl = document.querySelector(".crt-acc-btn");
 const formAccEl = document.querySelector(".crt-acc-form");
 const overlayEl = document.querySelector(".overlay");
+
 //Create form elements
 const signinContainer = document.querySelector(".signin-container");
 const loginContainer = document.querySelector(".login-container");
 const containers = [signinContainer, loginContainer];
+
 //SIGN IN
 const emailInputEl = document.querySelector(".email-input");
 const usernameInputEl = document.querySelector(".username");
@@ -159,11 +164,13 @@ const crtBtnFormEl = document.querySelector(".crt-acc-btn-form");
 const toLoginBtnEl = document.querySelector(".to-login-btn");
 const crtAccSucessModal = document.querySelector(".crt-acc-success");
 const successContinueBtn = document.querySelector(".success-continue");
+
 //Eye Elements
 const eyeBtnEl = document.querySelectorAll(".eye-btn");
 const eyeIconEl = document.querySelectorAll(".fa-solid.fa-eye-slash");
 const passwordEye = document.querySelector(".eye-pw");
 const rePasswordEye = document.querySelector(".eye-rpw");
+
 //LOGIN
 const emailInputLogin = document.querySelector(".email-input-login");
 const passwordInputLogin = document.querySelector(".password-input-login");
@@ -172,25 +179,27 @@ const toSigninBtnEl = document.querySelector(".to-signin-btn");
 const loginPasswordEye = document.querySelector(".eye-lpw");
 const checkLogin = document.querySelector(".check-login");
 const checkCreateAcc = document.querySelector(".check-crt-acc");
-//LOGOUT
 const logoutBtn = document.querySelector(".logout-btn");
 const logoutVerification = document.querySelector(".logout-verification");
 const logoutCancel = document.querySelector(".logout-cancel");
 const logoutVerify = document.querySelector(".logout-verify");
-//BUTTONS ARRAY
 const toBtns = [toLoginBtnEl, toSigninBtnEl];
+
 //SLIDER
 const prevArrow = document.querySelector(".prev");
 const nextArrow = document.querySelector(".next");
 const slides = document.querySelectorAll(".slide");
 const slidesArr = [...slides];
+
 //BAR ELEMENTS
 const navigation = document.querySelector(".navigation");
 const navigationUl = navigation.querySelector("ul");
 const menuBars = navigation.querySelector(".fa-bars");
 const sidebarMenus = document.querySelector(".sidebar-menus");
+
 //SEARCH ELEMENTS
 const searchResult = document.querySelector(".search-result");
+let searchResults;
 const noResult = document.querySelector(".no-result");
 const searchButton = document.querySelector(".search-btn");
 const searchBar = document.querySelector(".search-bar");
@@ -201,6 +210,7 @@ const filtersBar = document.querySelector(".filters-bar");
 const rightFilters = document.querySelector(".right-filters");
 const typeDropdown = document.querySelector(".type-dropdown");
 const priceDropdown = document.querySelector(".price-dropdown");
+
 //PRODUCTS ELEMENTS
 const pageLabelContainer = document.querySelector(".page-label-container");
 const navLabel = document.querySelector(".nav-label");
@@ -208,6 +218,7 @@ const pageContent = document.querySelector(".page-content");
 const productsContainer = document.querySelector(".products-container");
 const productImages = document.querySelectorAll(".product-img");
 const productShow = document.querySelector(".product-show");
+
 //ADD TO CART ELEMENTS
 const addToCartBtn = document.querySelector(".add-to-cart-btn");
 const navCart = document.querySelector(".nav-cart");
@@ -215,349 +226,7 @@ const cart = document.querySelector(".cart");
 const cartItemContainer = document.querySelector(".cart-item-container");
 const cartUl = cartItemContainer.querySelector("ul");
 
-const showProductDetails = (item) => {
-  productShow.innerHTML = `
-        <div class="product-images">
-            <img
-              src="images/${item.image}"
-              alt="${item.itemName}"
-              class="product-img-shown"
-            />
-          </div>
-          <div class="product-details">
-            <div class="product-details-wrapper">
-              <h1 class="product-name-shown">${item.itemName}</h1>
-              <p class="product-price-show">$${item.price.toLocaleString()}</p>
-              <p class="product-description">
-                ${item.description}
-              </p>
-              <p class="product-id">id:${item.id}</p>
-            </div>
-            <div class="product-btns-shown">
-              <button class="add-to-cart-btn">Add to cart</button>
-              <button class="buy-now-btn">Buy now</button>
-            </div>
-        </div> 
-    `;
-  productShow.style.display = "flex";
-};
-
-const showResultHeader = (items) => {
-  searchResult.innerHTML = `
-        <div class="result-header">
-            <span>Search <strong>"${searchInput.value}"</strong></span>
-            <div class="result-count">${items.length} ${
-    items.length > 1 ? "results" : "result"
-  }</div>
-        </div>
-  `;
-
-  searchResult.style.display = "flex";
-};
-
-const showNoResult = () => {
-  searchResult.innerHTML = `
-  <div class="no-result">
-            <p>
-              Sorry, no results for "${searchInput.value}", please search a different item.
-            </p>
-          </div>
-  `;
-  searchResult.style.display = "flex";
-};
-
-const displayShop = () => {
-  homeEl.style.display = "none";
-  aboutEl.style.display = "none";
-  shopEl.style.display = "none";
-  slideshowEl.style.display = "none";
-  pageContent.style.display = "grid";
-  cart.style.display = "none";
-};
-
-const displayShopLabel = () => {
-  navLabel.textContent = "Shop";
-  pageLabelContainer.style.display = "flex";
-  filtersBar.style.display = "flex";
-  productsContainer.style.display = "grid";
-  navigationUl.style.display = "none";
-};
-
-const displayHome = () => {
-  cart.style.display = "none";
-  homeEl.style.display = "flex";
-  aboutEl.style.display = "flex";
-  shopEl.style.display = "flex";
-  slideshowEl.style.display = "block";
-  pageContent.style.display = "none";
-  searchResult.style.display = "none";
-};
-
-const hideHome = () => {
-  homeEl.style.display = "none";
-  aboutEl.style.display = "none";
-  shopEl.style.display = "none";
-  slideshowEl.style.display = "none";
-};
-
-const hideShop = () => {
-  pageContent.style.display = "none";
-  searchResult.style.display = "none";
-};
-
-const showItemDetails = (e) => {
-  if (e.target.parentElement.classList.contains("list-item")) {
-    window.scrollTo({
-      top: 0,
-      behavior: "auto",
-    });
-    const clickedItemNum = e.target.parentElement.classList[0];
-    const clickedItem = searchResults.find(
-      (item) => clickedItemNum === item.itemNumber
-    );
-    productsContainer.style.display = "none";
-    filtersBar.style.display = "none";
-    searchResult.style.display = "none";
-    showProductDetails(clickedItem);
-  }
-};
-
-typeDropdown.addEventListener("click", (e) => {
-  if (e.target.tagName === "UL") return;
-  const targetType = e.target.textContent.toLowerCase();
-  const filterType = items.filter((item) => {
-    return targetType === item.type;
-  });
-
-  showItems(filterType);
-  searchResults = filterType;
-  if (targetType === "all") {
-    searchResults = items;
-    searchResult.style.display = "none";
-    showItems(searchResults);
-  }
-});
-
-priceDropdown.addEventListener("click", (e) => {
-  if (e.target.tagName === "UL") return;
-
-  if (e.target.classList[0] === "low-to-high") {
-    searchResults.sort((a, b) => a.price - b.price);
-    showItems(searchResults);
-  }
-  if (e.target.classList[0] === "high-to-low") {
-    searchResults.sort((a, b) => b.price - a.price);
-    showItems(searchResults);
-  }
-});
-
-searchInput.addEventListener("keyup", function (e) {
-  const searchValue = this.value.toLowerCase();
-  const filterData = items.filter((item) => {
-    return (
-      item.itemName.toLowerCase().includes(searchValue) ||
-      item.type.toLowerCase().includes(searchValue)
-    );
-  });
-  if (e.key === "Enter") {
-    displayShopLabel();
-
-    searchResults = items;
-    displayShop();
-
-    showItems(filterData);
-
-    searchResults = filterData;
-    showResultHeader(searchResults);
-    if (searchResults.length <= 0 || searchInput.value === "") {
-      showNoResult();
-      showItems(items);
-      searchResults = items;
-      if (
-        searchValue == "eyey" ||
-        searchValue == "mahal" ||
-        searchValue == "abo" ||
-        searchValue == "ash" ||
-        searchValue == "alyssa" ||
-        searchValue == "ashley" ||
-        searchValue == "alyssa ashley" ||
-        searchValue == "alyssa ashley rotairo inarda" ||
-        searchValue == "alyssa ashley r. inarda" ||
-        searchValue == "alyssa ashley r inarda" ||
-        searchValue == "alyssa ashley inarda" ||
-        searchValue == "eyey inarda"
-      ) {
-        searchResult.innerHTML = `
-          <div class="no-result">
-            <p>
-              I love you ${searchValue}!❤️
-            </p>
-          </div>
-        `;
-        searchResult.style.display = "flex";
-      }
-    }
-
-    displayShop();
-    closeSearchBar();
-
-    productsContainer.addEventListener("click", function (e) {
-      showItemDetails(e);
-    });
-
-    addToCartBtn.addEventListener("click", () => {
-      console.log(addToCartBtn);
-    });
-  }
-});
-
-const showItems = (items) => {
-  productsContainer.innerHTML = items
-    .map((item) => {
-      const html = `<div class="${item.itemNumber} list-item">
-  <img src="images/${item.image}" alt="${item.itemName}" class="product-img"/>
-  <div class="product-info">
-    <div class="product-name">${item.itemName}</div>
-    <p class="price">$${item.price.toLocaleString()}</p>
-  </div>
-</div>`;
-
-      return html;
-    })
-    .join("");
-};
-
-//1. Add to cart button clicked, item push to an array
-//2. Add 1 to the count of the item whenever added to cart
-//3.push the items array to a set
-//4.item set push to an non-constant variable array
-//5.Show items when navigation cart clicked
-//6. Show count of items in the cart in the inner html of nav cart
-//7.
-
-const cartItems = [];
-let cartSet;
-let cartUniqueItems;
-
-productShow.addEventListener("click", function (e) {
-  const itemName = document.querySelector(".product-name-shown");
-  const item = searchResults.find(
-    (item) => item.itemName === itemName.textContent
-  );
-  if (e.target.classList[0] === "add-to-cart-btn") {
-    cartItems.push(item);
-    item.count += 1;
-    // console.log(cartItems);
-
-    cartSet = new Set([...cartItems]);
-
-    cartUniqueItems = [...cartSet];
-
-    console.log(cartUniqueItems);
-
-    displayNumCartItems();
-
-    displayEstimatedPrice();
-  }
-});
-
-const displayEstimatedPrice = () => {
-  const estimatedTotalPrice = document.querySelector(".estimated-total-price");
-  let estimatedPrice = 0;
-
-  cartUniqueItems.forEach((item) => {
-    estimatedPrice += item.price * item.count;
-    console.log(estimatedPrice);
-    estimatedTotalPrice.textContent = `$${estimatedPrice.toLocaleString()}`;
-  });
-};
-
-const showCartItems = (items) => {
-  cartUl.innerHTML = items
-    .map((item) => {
-      const html = `
-          <li class="cart-item">
-            <div class="cart-item-wrapper">
-              <div class="cart-item-images">
-                <img src="images/${item.image}" alt="${item.itemName}" />
-              </div>
-                <div class="cart-item-details">
-                  <h3 class="cart-item-name">${item.itemName}</h3>
-                  <p class="cart-item-price">$${item.price.toLocaleString()}</p>
-                  <div class="cart-item-quantity">
-                    <p>Quantity:</p>
-                    <button class="decrease-quantity">-</button>
-                    <p class="count">${item.count}</p>
-                    <button class="increase-quantity">+</button>
-                  </div>
-                </div>
-              </div>
-              <div class="cart-action">
-                <p>Edit</p>
-                <p>Delete</p>
-              </div>
-          </li>
-  `;
-
-      return html;
-    })
-    .join("");
-};
-
-const displayNumCartItems = () => {
-  const cartItemCount = document.querySelector(".cart-item-count");
-  let itemQuantity = 0;
-  for (c of cartUniqueItems) {
-    itemQuantity += c.count;
-  }
-  navCart.textContent = itemQuantity;
-  cartItemCount.textContent = `Cart (${itemQuantity})`;
-};
-
-navCart.addEventListener("click", function () {
-  navLabel.textContent = "Cart";
-  pageLabelContainer.style.display = "flex";
-  navigationUl.style.display = "none";
-  hideHome();
-  hideShop();
-  cart.style.display = "flex";
-
-  if (cartUniqueItems) {
-    showCartItems(cartUniqueItems);
-  } else {
-    console.log("no item");
-  }
-});
-
-const displayQuantityChange = (e, sign) => {
-  const itemTarget = e.target.closest(".cart-item");
-  const targetName = itemTarget.querySelector(".cart-item-name").textContent;
-  const findTargetItem = searchResults.find(
-    (item) => targetName === item.itemName
-  );
-  const count = itemTarget.querySelector(".count");
-  if (sign === "-") {
-    if (+count.textContent <= 0) return;
-    findTargetItem.count -= 1;
-  } else if (sign === "+") {
-    findTargetItem.count += 1;
-  }
-  count.textContent = findTargetItem.count;
-  console.log(findTargetItem.count);
-
-  displayNumCartItems();
-  displayEstimatedPrice();
-};
-
-cartItemContainer.addEventListener("click", function (e) {
-  if (e.target.classList[0] === "increase-quantity") {
-    displayQuantityChange(e, "+");
-  }
-  if (e.target.classList[0] === "decrease-quantity") {
-    displayQuantityChange(e, "-");
-  }
-});
-
+//HOME BUTTONS
 logo.addEventListener("click", () => {
   displayHome();
   pageLabelContainer.style.display = "none";
@@ -585,36 +254,19 @@ shopNowBtn.addEventListener("click", () => {
   });
 });
 
-//Search Functionality
-searchButton.addEventListener("click", function () {
-  searchBar.style.top = "0";
-  overlayEl.style.display = "block";
-  searchInput.focus();
-});
-
-searchInput.addEventListener("input", function () {
-  if (this.value != "") {
-    clearSearch.style.display = "block";
-  } else {
-    clearSearch.style.display = "none";
-  }
-});
-
-const closeSearchBar = () => {
-  searchBar.style.top = "-12vh";
-  searchInput.value = "";
-  clearSearch.style.display = "none";
-  overlayEl.style.display = "none";
+//Scroll to view functions
+const scrollToHome = () => {
+  homeEl.scrollIntoView({ behavior: "smooth" });
 };
-
-clearSearch.addEventListener("click", function () {
-  searchInput.value = "";
-  this.style.display = "none";
-});
-
-closeSearch.addEventListener("click", function () {
-  closeSearchBar();
-});
+const scrollToCollection = () => {
+  shopEl.scrollIntoView({ behavior: "smooth" });
+};
+const scrollToAbout = () => {
+  aboutEl.scrollIntoView({ behavior: "smooth" });
+};
+const scrollToSlideshow = () => {
+  slideshowEl.scrollIntoView({ behavior: "smooth" });
+};
 
 //MENU FUNCTIONALITY
 if (menuBars) {
@@ -649,20 +301,6 @@ const changeToCurrentAcc = (currAcc) => {
   usernameLabel.textContent = currentAcc.username;
   welcomeText.textContent = `Hi, ${currAcc.username}! Welcome to Elavare,`;
   console.log(currentAcc);
-};
-
-//Scroll to view functions
-const scrollToHome = () => {
-  homeEl.scrollIntoView({ behavior: "smooth" });
-};
-const scrollToCollection = () => {
-  shopEl.scrollIntoView({ behavior: "smooth" });
-};
-const scrollToAbout = () => {
-  aboutEl.scrollIntoView({ behavior: "smooth" });
-};
-const scrollToSlideshow = () => {
-  slideshowEl.scrollIntoView({ behavior: "smooth" });
 };
 
 //Create Account Modal
@@ -930,3 +568,410 @@ const autoSlideshow = () => {
 autoSlideshow();
 
 overlayEl.style.height = `${document.body.offsetHeight}px`;
+
+////////Search Functionality
+searchButton.addEventListener("click", function () {
+  searchBar.style.top = "0";
+  overlayEl.style.display = "block";
+  searchInput.focus();
+});
+
+searchInput.addEventListener("input", function () {
+  if (this.value != "") {
+    clearSearch.style.display = "block";
+  } else {
+    clearSearch.style.display = "none";
+  }
+});
+
+const closeSearchBar = () => {
+  searchBar.style.top = "-12vh";
+  searchInput.value = "";
+  clearSearch.style.display = "none";
+  overlayEl.style.display = "none";
+};
+
+clearSearch.addEventListener("click", function () {
+  searchInput.value = "";
+  this.style.display = "none";
+});
+
+closeSearch.addEventListener("click", function () {
+  closeSearchBar();
+});
+
+//////////// SHOP
+const showProductDetails = (item) => {
+  productShow.innerHTML = `
+        <div class="product-images">
+            <img
+              src="images/${item.image}"
+              alt="${item.itemName}"
+              class="product-img-shown"
+            />
+          </div>
+          <div class="product-details">
+            <div class="product-details-wrapper">
+              <h1 class="product-name-shown">${item.itemName}</h1>
+              <p class="product-price-show">$${item.price.toLocaleString()}</p>
+              <p class="product-description">
+                ${item.description}
+              </p>
+              <p class="product-id">id:${item.id}</p>
+            </div>
+            <div class="product-btns-shown">
+              <button class="add-to-cart-btn">Add to cart</button>
+              <button class="buy-now-btn">Buy now</button>
+            </div>
+        </div> 
+    `;
+  productShow.style.display = "flex";
+};
+
+const showResultHeader = (items) => {
+  searchResult.innerHTML = `
+        <div class="result-header">
+            <span>Search <strong>"${searchInput.value}"</strong></span>
+            <div class="result-count">${items.length} ${
+    items.length > 1 ? "results" : "result"
+  }</div>
+        </div>
+  `;
+
+  searchResult.style.display = "flex";
+};
+
+const showNoResult = () => {
+  searchResult.innerHTML = `
+  <div class="no-result">
+            <p>
+              Sorry, no results for "${searchInput.value}", please search a different item.
+            </p>
+          </div>
+  `;
+  searchResult.style.display = "flex";
+};
+
+const showItems = (items) => {
+  productsContainer.innerHTML = items
+    .map((item) => {
+      const html = `<div class="${item.itemNumber} list-item">
+  <img src="images/${item.image}" alt="${item.itemName}" class="product-img"/>
+  <div class="product-info">
+    <div class="product-name">${item.itemName}</div>
+    <p class="price">$${item.price.toLocaleString()}</p>
+  </div>
+</div>`;
+
+      return html;
+    })
+    .join("");
+};
+
+const showItemDetails = (e) => {
+  if (e.target.parentElement.classList.contains("list-item")) {
+    window.scrollTo({
+      top: 0,
+      behavior: "auto",
+    });
+    const clickedItemNum = e.target.parentElement.classList[0];
+    const clickedItem = searchResults.find(
+      (item) => clickedItemNum === item.itemNumber
+    );
+    productsContainer.style.display = "none";
+    filtersBar.style.display = "none";
+    searchResult.style.display = "none";
+    showProductDetails(clickedItem);
+  }
+};
+
+const showCartItems = (items) => {
+  cartUl.innerHTML = items
+    .map((item) => {
+      const html = `
+          <li class="cart-item">
+            <div class="cart-item-wrapper">
+              <div class="cart-item-images">
+                <img src="images/${item.image}" alt="${item.itemName}" />
+              </div>
+                <div class="cart-item-details">
+                  <h3 class="cart-item-name">${item.itemName}</h3>
+                  <p class="cart-item-price">$${item.price.toLocaleString()}</p>
+                  <div class="cart-item-quantity">
+                    <p>Quantity:</p>
+                    <button class="decrease-quantity">-</button>
+                    <p class="count">${item.count}</p>
+                    <button class="increase-quantity">+</button>
+                  </div>
+                </div>
+              </div>
+              <div class="cart-action">
+                <p class="edit-action">Edit</p>
+                <p class="delete-action">Delete</p>
+              </div>
+          </li>
+  `;
+
+      return html;
+    })
+    .join("");
+};
+
+const displayShop = () => {
+  homeEl.style.display = "none";
+  aboutEl.style.display = "none";
+  shopEl.style.display = "none";
+  slideshowEl.style.display = "none";
+  pageContent.style.display = "grid";
+  cart.style.display = "none";
+};
+
+const displayShopLabel = () => {
+  navLabel.textContent = "Shop";
+  pageLabelContainer.style.display = "flex";
+  filtersBar.style.display = "flex";
+  productsContainer.style.display = "grid";
+  navigationUl.style.display = "none";
+};
+
+const displayHome = () => {
+  cart.style.display = "none";
+  homeEl.style.display = "flex";
+  aboutEl.style.display = "flex";
+  shopEl.style.display = "flex";
+  slideshowEl.style.display = "block";
+  pageContent.style.display = "none";
+  searchResult.style.display = "none";
+};
+
+const hideHome = () => {
+  homeEl.style.display = "none";
+  aboutEl.style.display = "none";
+  shopEl.style.display = "none";
+  slideshowEl.style.display = "none";
+};
+
+const hideShop = () => {
+  pageContent.style.display = "none";
+  searchResult.style.display = "none";
+};
+
+let estimatedPrice;
+const displayEstimatedPrice = () => {
+  const estimatedTotalPrice = document.querySelector(".estimated-total-price");
+  estimatedPrice = 0;
+
+  if (cartUniqueItems.length <= 0) {
+    estimatedPrice = 0;
+    estimatedTotalPrice.textContent = `$${estimatedPrice.toLocaleString()}`;
+  }
+
+  cartUniqueItems.forEach((item) => {
+    estimatedPrice += item.price * item.count;
+    estimatedTotalPrice.textContent = `$${estimatedPrice.toLocaleString()}`;
+  });
+};
+
+const displayNumCartItems = () => {
+  const cartItemCount = document.querySelector(".cart-item-count");
+  let itemQuantity = 0;
+  for (let c of cartUniqueItems) {
+    itemQuantity += c.count;
+  }
+  navCart.textContent = itemQuantity;
+  cartItemCount.textContent = `Cart (${itemQuantity})`;
+};
+
+const displayQuantityChange = (e, sign) => {
+  const itemTarget = e.target.closest(".cart-item");
+  const targetName = itemTarget.querySelector(".cart-item-name").textContent;
+  const findTargetItem = searchResults.find(
+    (item) => targetName === item.itemName
+  );
+  const count = itemTarget.querySelector(".count");
+  if (sign === "-") {
+    if (+count.textContent <= 1) return;
+    findTargetItem.count -= 1;
+  } else if (sign === "+") {
+    findTargetItem.count += 1;
+  }
+  count.textContent = findTargetItem.count;
+  console.log(findTargetItem.count);
+
+  displayNumCartItems();
+  displayEstimatedPrice();
+};
+
+//SHOP LISTENERS
+typeDropdown.addEventListener("click", (e) => {
+  if (e.target.tagName === "UL") return;
+  const targetType = e.target.textContent.toLowerCase();
+  const filterType = items.filter((item) => {
+    return targetType === item.type;
+  });
+
+  showItems(filterType);
+  searchResults = filterType;
+  if (targetType === "all") {
+    searchResults = items;
+    searchResult.style.display = "none";
+    showItems(searchResults);
+  }
+});
+
+priceDropdown.addEventListener("click", (e) => {
+  if (e.target.tagName === "UL") return;
+
+  if (e.target.classList[0] === "low-to-high") {
+    searchResults.sort((a, b) => a.price - b.price);
+    showItems(searchResults);
+  }
+  if (e.target.classList[0] === "high-to-low") {
+    searchResults.sort((a, b) => b.price - a.price);
+    showItems(searchResults);
+  }
+});
+
+searchInput.addEventListener("keyup", function (e) {
+  const searchValue = this.value.toLowerCase();
+  const filterData = items.filter((item) => {
+    return (
+      item.itemName.toLowerCase().includes(searchValue) ||
+      item.type.toLowerCase().includes(searchValue)
+    );
+  });
+  if (e.key === "Enter") {
+    displayShopLabel();
+
+    searchResults = items;
+    displayShop();
+
+    showItems(filterData);
+
+    searchResults = filterData;
+    showResultHeader(searchResults);
+    if (searchResults.length <= 0 || searchInput.value === "") {
+      showNoResult();
+      showItems(items);
+      searchResults = items;
+      if (
+        searchValue == "eyey" ||
+        searchValue == "mahal" ||
+        searchValue == "abo" ||
+        searchValue == "ash" ||
+        searchValue == "alyssa" ||
+        searchValue == "ashley" ||
+        searchValue == "alyssa ashley" ||
+        searchValue == "alyssa ashley rotairo inarda" ||
+        searchValue == "alyssa ashley r. inarda" ||
+        searchValue == "alyssa ashley r inarda" ||
+        searchValue == "alyssa ashley inarda" ||
+        searchValue == "eyey inarda"
+      ) {
+        searchResult.innerHTML = `
+          <div class="no-result">
+            <p>
+              I love you ${searchValue}!❤️
+            </p>
+          </div>
+        `;
+        searchResult.style.display = "flex";
+      }
+    }
+
+    displayShop();
+    closeSearchBar();
+
+    productsContainer.addEventListener("click", function (e) {
+      showItemDetails(e);
+    });
+  }
+});
+
+//1. Add to cart button clicked, item push to an array
+//2. Add 1 to the count of the item whenever added to cart
+//3.push the items array to a set
+//4.item set push to an non-constant variable array
+//5.Show items when navigation cart clicked
+//6. Show count of items in the cart in the inner html of nav cart
+
+const cartItems = [];
+let cartSet;
+let cartUniqueItems;
+
+productShow.addEventListener("click", function (e) {
+  const itemName = document.querySelector(".product-name-shown");
+  const item = searchResults.find(
+    (item) => item.itemName === itemName.textContent
+  );
+  if (e.target.classList[0] === "add-to-cart-btn") {
+    cartItems.push(item);
+    item.count += 1;
+    // console.log(cartItems);
+
+    cartSet = new Set([...cartItems]);
+
+    cartUniqueItems = [...cartSet];
+
+    console.log(cartUniqueItems);
+
+    displayNumCartItems();
+
+    displayEstimatedPrice();
+  }
+});
+
+navCart.addEventListener("click", function () {
+  navLabel.textContent = "Cart";
+  pageLabelContainer.style.display = "flex";
+  navigationUl.style.display = "none";
+  hideHome();
+  hideShop();
+  cart.style.display = "flex";
+
+  if (cartUniqueItems) {
+    showCartItems(cartUniqueItems);
+  } else {
+    console.log("no item");
+  }
+});
+
+cartItemContainer.addEventListener("click", function (e) {
+  if (e.target.classList[0] === "increase-quantity") {
+    displayQuantityChange(e, "+");
+  }
+  if (e.target.classList[0] === "decrease-quantity") {
+    displayQuantityChange(e, "-");
+  }
+  if (e.target.classList[0] === "delete-action") {
+    //1. delete the item in the item cart
+    //2. decrease the total of items
+    //3. less the price of the deleted item to the total price
+    const itemTarget = e.target.closest(".cart-item");
+    const targetName = itemTarget.querySelector(".cart-item-name").textContent;
+    const findTargetItem = searchResults.find(
+      (item) => targetName === item.itemName
+    );
+
+    const itemIndices = cartItems.reduce((indices, item, index) => {
+      if (item == findTargetItem) {
+        indices.push(index);
+      }
+      return indices;
+    }, []);
+    itemIndices.reverse();
+    itemIndices.forEach((idx) => {
+      cartItems.splice(idx, 1);
+    });
+    findTargetItem.count = 0;
+
+    cartSet = new Set([...cartItems]);
+
+    cartUniqueItems = [...cartSet];
+
+    showCartItems(cartUniqueItems);
+
+    displayNumCartItems();
+    displayEstimatedPrice();
+  }
+});
