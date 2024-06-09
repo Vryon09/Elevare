@@ -243,11 +243,11 @@ button {
 } */
 
 .page-label-container {
-  width: 100px;
-  /* background-color: aqua; */
+  width: 150px;
   display: none;
-  justify-content: center;
+  justify-content: baseline;
   align-items: center;
+  margin-left: 20px;
 }
 
 .nav-label {
@@ -489,7 +489,8 @@ button {
   cursor: pointer;
 }
 
-.total-price {
+.total-price,
+.check-out-total {
   height: 8rem;
   width: 45%;
   border: 1px solid black;
@@ -499,7 +500,8 @@ button {
   align-items: center;
 }
 
-.estimated-total {
+.estimated-total,
+.co-total-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -533,6 +535,117 @@ button {
   background-color: rgb(0, 0, 0, 0.8);
 }
 
+/* Check out page */
+
+.co-top-space {
+  height: 45px;
+  width: 100%;
+  border-bottom: 1px solid black;
+}
+
+.check-out-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  display: none;
+  /* margin-top: 45px; */
+  border-top: 1px solid black;
+}
+
+.check-out-page > *:not(:first-child):not(:nth-last-child(2)):not(:last-child) {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid black;
+  border-top: none;
+  width: 45%;
+}
+
+.check-out-header {
+  height: 30vh;
+}
+
+.check-out-header > * {
+  margin: 3px 0;
+}
+
+.check-out-header > *:not(:first-child) {
+  font-size: 1rem;
+}
+
+.view-summary {
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.check-out-num-info {
+  display: flex;
+}
+
+.check-out-num-info > * {
+  margin: 0 10px;
+}
+
+.order-summary {
+  border-top: none;
+}
+
+.summary-label-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid black;
+  width: 100%;
+  height: 45px;
+}
+
+.order-items {
+  width: 100%;
+}
+
+.order-item {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.order-items ul li:not(:last-child) {
+  border-bottom: 1px solid black;
+}
+
+.order-image {
+  width: 30%;
+}
+
+.order-image img {
+  width: 100%;
+}
+
+.order-details {
+  width: 70%;
+}
+
+.order-details > * {
+  margin: 0 6px;
+}
+
+.order-details > *:first-child {
+  margin-top: 10px;
+}
+
+.check-out-total {
+  border: 1px solid black;
+  border-top: none;
+  border-bottom: none;
+}
+
+.co-bottom-space {
+  width: 100%;
+  border-top: 1px solid black;
+}
 /* Sidebar */
 
 .sidebar-menus {

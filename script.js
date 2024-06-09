@@ -226,12 +226,22 @@ const cart = document.querySelector(".cart");
 const cartItemContainer = document.querySelector(".cart-item-container");
 const cartUl = cartItemContainer.querySelector("ul");
 
+//CHECKOUT ELEMENTS
+const checkOutPage = document.querySelector(".check-out-page");
+const orderItems = document.querySelector(".order-items");
+const orderUl = orderItems.querySelector("ul");
+const orderSummary = document.querySelector(".order-summary");
+const coHeaderTotal = document.querySelector(".co-header-total");
+const coTotalText = document.querySelector(".co-total-text");
+const coCount = document.querySelector(".co-count");
+
 //HOME BUTTONS
 logo.addEventListener("click", () => {
   displayHome();
   pageLabelContainer.style.display = "none";
   navigationUl.style.display = "flex";
   productShow.innerHTML = "";
+  checkOutPage.style.display = "none";
 });
 
 navLabel.addEventListener("click", () => {
@@ -600,6 +610,37 @@ closeSearch.addEventListener("click", function () {
   closeSearchBar();
 });
 
+//DROPDOWNS
+
+typeDropdown.addEventListener("click", (e) => {
+  if (e.target.tagName === "UL") return;
+  const targetType = e.target.textContent.toLowerCase();
+  const filterType = items.filter((item) => {
+    return targetType === item.type;
+  });
+
+  showItems(filterType);
+  searchResults = filterType;
+  if (targetType === "all") {
+    searchResults = items;
+    searchResult.style.display = "none";
+    showItems(searchResults);
+  }
+});
+
+priceDropdown.addEventListener("click", (e) => {
+  if (e.target.tagName === "UL") return;
+
+  if (e.target.classList[0] === "low-to-high") {
+    searchResults.sort((a, b) => a.price - b.price);
+    showItems(searchResults);
+  }
+  if (e.target.classList[0] === "high-to-low") {
+    searchResults.sort((a, b) => b.price - a.price);
+    showItems(searchResults);
+  }
+});
+
 //////////// SHOP
 const showProductDetails = (item) => {
   productShow.innerHTML = `
@@ -688,6 +729,8 @@ const showItemDetails = (e) => {
 const showCartItems = (items) => {
   cartUl.innerHTML = items
     .map((item) => {
+      const priceUn = item.price * item.count;
+
       const html = `
           <li class="cart-item">
             <div class="cart-item-wrapper">
@@ -696,7 +739,7 @@ const showCartItems = (items) => {
               </div>
                 <div class="cart-item-details">
                   <h3 class="cart-item-name">${item.itemName}</h3>
-                  <p class="cart-item-price">$${item.price.toLocaleString()}</p>
+                  <p class="cart-item-price">$${priceUn.toLocaleString()}</p>
                   <div class="cart-item-quantity">
                     <p>Quantity:</p>
                     <button class="decrease-quantity">-</button>
@@ -716,6 +759,57 @@ const showCartItems = (items) => {
     })
     .join("");
 };
+
+const showCheckoutItems = () => {
+  orderUl.innerHTML = cartUniqueItems
+    .map((item) => {
+      const html = `
+      <li class="order-item">
+              <div class="order-image">
+                <img src="images/${item.image}" alt="${item.itemName}" />
+              </div>
+              <div class="order-details">
+                <h3>${item.itemName}</h3>
+                <p>$${item.price * item.count}</p>
+                <p>Quantity: ${item.count}</p>
+              </div>
+            </li>
+    `;
+      return html;
+    })
+    .join("");
+};
+
+window.addEventListener("click", function (e) {
+  if (e.target.classList[0] == "check-out-btn") {
+    if (!cartUniqueItems || cartUniqueItems.length <= 0) return;
+
+    const totalPrice = cartUniqueItems.reduce(
+      (total, item) => total + item.price * item.count,
+      0
+    );
+
+    const totalCount = cartUniqueItems.reduce(
+      (count, item) => count + item.count,
+      0
+    );
+
+    coCount.textContent = `${
+      totalCount <= 1 ? `${totalCount} item` : `${totalCount} items`
+    }`;
+    coHeaderTotal.textContent = `$${totalPrice.toLocaleString()}`;
+    coTotalText.textContent = `$${totalPrice.toLocaleString()}`;
+    showCheckoutItems();
+
+    navLabel.textContent = "Checkout";
+    cart.style.display = "none";
+    checkOutPage.style.display = "flex";
+  }
+
+  if (e.target.classList[0] == "view-summary") {
+    orderSummary.scrollIntoView({ behavior: "smooth" });
+  }
+});
 
 const displayShop = () => {
   homeEl.style.display = "none";
@@ -800,37 +894,10 @@ const displayQuantityChange = (e, sign) => {
 
   displayNumCartItems();
   displayEstimatedPrice();
+  showCartItems(cartUniqueItems);
 };
 
 //SHOP LISTENERS
-typeDropdown.addEventListener("click", (e) => {
-  if (e.target.tagName === "UL") return;
-  const targetType = e.target.textContent.toLowerCase();
-  const filterType = items.filter((item) => {
-    return targetType === item.type;
-  });
-
-  showItems(filterType);
-  searchResults = filterType;
-  if (targetType === "all") {
-    searchResults = items;
-    searchResult.style.display = "none";
-    showItems(searchResults);
-  }
-});
-
-priceDropdown.addEventListener("click", (e) => {
-  if (e.target.tagName === "UL") return;
-
-  if (e.target.classList[0] === "low-to-high") {
-    searchResults.sort((a, b) => a.price - b.price);
-    showItems(searchResults);
-  }
-  if (e.target.classList[0] === "high-to-low") {
-    searchResults.sort((a, b) => b.price - a.price);
-    showItems(searchResults);
-  }
-});
 
 searchInput.addEventListener("keyup", function (e) {
   const searchValue = this.value.toLowerCase();
@@ -975,3 +1042,5 @@ cartItemContainer.addEventListener("click", function (e) {
     displayEstimatedPrice();
   }
 });
+
+//1. Create a function that will display the added items
